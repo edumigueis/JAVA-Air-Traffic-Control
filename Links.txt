@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/11726162/trouble-with-air-traffic-control-program-using-linkedlist-java
+https://github.com/emmanuelneri/estrutura-de-dados/blob/master/src/main/java/br/com/emmanuelneri/listas/dinamica/encadeadas/implementacao/ListaEncadeada.java
