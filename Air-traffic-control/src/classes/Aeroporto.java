@@ -5,12 +5,15 @@
  */
 package classes;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @author Eduardo Migueis, Rodrigo Smith and Manuela Benassi.
  * @since 2020.
  */
 public class Aeroporto {
-    private int idVoo;
+    static AtomicInteger nextId = new AtomicInteger();
+    private int idAeroporto;
     private String codigoIATA = "";
     private String codigoICAO = "";
     private String nomeAero = "";
@@ -25,6 +28,7 @@ public class Aeroporto {
         this.pais = pais;
         this.cidade = cidade;
         this.listaVoos = new ListaDuplamenteLigadaOrdenada<Voo>();
+        idAeroporto = nextId.incrementAndGet();
     }
     
     public String getCodigoIATA(){
