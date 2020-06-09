@@ -38,11 +38,15 @@ public class VoosUI extends javax.swing.JDialog {
         jFormattedTextField3 = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
         jFormattedTextField4 = new javax.swing.JFormattedTextField();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(" Designers");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 225));
+        jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(219, 219, 225));
         jPanel2.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 11)); // NOI18N
@@ -91,6 +95,7 @@ public class VoosUI extends javax.swing.JDialog {
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         jFormattedTextField1.setText("jFormattedTextField1");
+        jFormattedTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel4.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 190, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -102,9 +107,11 @@ public class VoosUI extends javax.swing.JDialog {
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         jFormattedTextField2.setText("jFormattedTextField2");
+        jFormattedTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel4.add(jFormattedTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 190, 30));
 
         jFormattedTextField3.setText("jFormattedTextField3");
+        jFormattedTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel4.add(jFormattedTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 190, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -113,9 +120,15 @@ public class VoosUI extends javax.swing.JDialog {
         jLabel7.getAccessibleContext().setAccessibleName("Companhia Operadora:");
 
         jFormattedTextField4.setText("jFormattedTextField4");
+        jFormattedTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel4.add(jFormattedTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 190, 30));
 
         jTabbedPane1.addTab("Cadastrar  ", jPanel4);
+
+        jPanel1.setBackground(new java.awt.Color(219, 219, 225));
+        jPanel1.setToolTipText("");
+        jPanel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTabbedPane1.addTab("Lista", jPanel1);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 610, 370));
         jTabbedPane1.getAccessibleContext().setAccessibleName("Consultar/  Excluir  ");
@@ -161,6 +174,7 @@ public class VoosUI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator2;
