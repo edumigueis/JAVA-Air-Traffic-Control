@@ -28,7 +28,7 @@ public class Aeroporto {
         this.pais = pais;
         this.cidade = cidade;
         this.listaVoos = new ListaDuplamenteLigadaOrdenada<Voo>();
-        idAeroporto = nextId.incrementAndGet();
+        this.idAeroporto = nextId.incrementAndGet();
     }
     
     public String getCodigoIATA(){
@@ -46,11 +46,13 @@ public class Aeroporto {
     public String getCidade(){
         return this.cidade;
     }
-    
+    public ListaDuplamenteLigadaOrdenada<Voo> getVoos(){
+        return this.listaVoos;
+    }
     public void setCodigoIATA(String codigo) throws Exception
     {
         if(codigo.equals("")){
-            throw new Exception("Código inválido.");
+            throw new Exception("Código IATA inválido.");
         }
         else
         this.codigoIATA = codigo;
@@ -58,9 +60,33 @@ public class Aeroporto {
     public void setCodigoICAO(String codigo) throws Exception
     {
         if(codigo.equals("")){
-            throw new Exception("Código inválido.");
+            throw new Exception("Código ICAO inválido.");
         }
         else
         this.codigoICAO = codigo;
+    }
+    public void setNome(String nome) throws Exception
+    {
+        if(nome.equals("")){
+            throw new Exception("Nome inválido.");
+        }
+        else
+        this.nomeAero = nome;
+    }
+    public void setPais(String pais) throws Exception
+    {
+        if(pais.equals("")){
+            throw new Exception("País inválido.");
+        }
+        else
+        this.pais = pais;
+    }
+    public void setCidade(String cidade) throws Exception
+    {
+        if(cidade.equals("")){
+            throw new Exception("Cidade inválida.");
+        }
+        else
+        this.cidade = cidade;
     }
 }

@@ -5,13 +5,15 @@
  */
 package classes;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
- *
  * @author Eduardo Migueis, Rodrigo Smith and Manuela Benassi.
  * @since 2020.
  */
 public class Voo {
     private int idVoo;
+    static AtomicInteger nextId = new AtomicInteger();
     private int numeroVoo = 0;
     private String aeroOrigem = "";
     private String aeroDestino = "";
@@ -22,7 +24,7 @@ public class Voo {
         this.aeroOrigem = aeroOrigem;
         this.aeroDestino = aeroDestino;
         this.companhiaOperadora = companhiaOperadora;
-        this.idVoo++;
+        this.idVoo = nextId.incrementAndGet();
     }
     
     public int getNumeroVoo(){
