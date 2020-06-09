@@ -27,12 +27,15 @@ public class VoosUI extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        jFormattedTextField3 = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -49,8 +52,8 @@ public class VoosUI extends javax.swing.JDialog {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 12)); // NOI18N
-        jLabel2.setText("Código do designer:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        jLabel2.setText("Código do voo:");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 12)); // NOI18N
         jLabel6.setText("Email:");
@@ -67,15 +70,6 @@ public class VoosUI extends javax.swing.JDialog {
         jLabel12.setToolTipText("");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 12)); // NOI18N
-        jLabel13.setText("Endereço:");
-        jLabel13.setToolTipText("");
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
-
-        jLabel7.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 12)); // NOI18N
-        jLabel7.setText("N°:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
-
         jLabel15.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 12)); // NOI18N
         jLabel15.setText("Telefone:");
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 60, -1));
@@ -84,19 +78,37 @@ public class VoosUI extends javax.swing.JDialog {
         jLabel24.setText("CEP:");
         jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
-        jTabbedPane1.addTab("Consultar/ Editar / Excluir  ", jPanel2);
+        jTabbedPane1.addTab("Consultar/ Excluir  ", jPanel2);
 
         jPanel4.setBackground(new java.awt.Color(219, 219, 225));
         jPanel4.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 11)); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Nirmala UI Semilight", 0, 12)); // NOI18N
-        jLabel3.setText("Código");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Número do voo:");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        jFormattedTextField1.setText("jFormattedTextField1");
+        jPanel4.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 130, 30));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Aeroporto de chegada:");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Aeroporto de saída:");
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+
+        jFormattedTextField2.setText("jFormattedTextField2");
+        jPanel4.add(jFormattedTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 130, 30));
+
+        jFormattedTextField3.setText("jFormattedTextField3");
+        jPanel4.add(jFormattedTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 130, 30));
 
         jTabbedPane1.addTab("Cadastrar  ", jPanel4);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 610, 370));
+        jTabbedPane1.getAccessibleContext().setAccessibleName("Consultar/  Excluir  ");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/flights.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-320, 0, 1070, 440));
@@ -124,16 +136,19 @@ public class VoosUI extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JFormattedTextField jFormattedTextField2;
+    private javax.swing.JFormattedTextField jFormattedTextField3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator2;

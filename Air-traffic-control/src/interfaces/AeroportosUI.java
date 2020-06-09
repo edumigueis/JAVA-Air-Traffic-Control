@@ -59,7 +59,7 @@ public class AeroportosUI extends javax.swing.JDialog {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("País:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 40, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 40, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Nome:");
@@ -69,7 +69,7 @@ public class AeroportosUI extends javax.swing.JDialog {
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel24.setText("Cidade:");
-        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
         jFormattedTextField3.setText("jFormattedTextField3");
         jFormattedTextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -88,10 +88,10 @@ public class AeroportosUI extends javax.swing.JDialog {
         jPanel2.add(jFormattedTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 310, 20));
 
         jFormattedTextField5.setText("jFormattedTextField5");
-        jPanel2.add(jFormattedTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 310, 20));
+        jPanel2.add(jFormattedTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 310, 20));
 
         jFormattedTextField6.setText("jFormattedTextField6");
-        jPanel2.add(jFormattedTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 310, 20));
+        jPanel2.add(jFormattedTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 310, 20));
 
         jTabbedPane1.addTab("Consultar/ Excluir  ", jPanel2);
 
