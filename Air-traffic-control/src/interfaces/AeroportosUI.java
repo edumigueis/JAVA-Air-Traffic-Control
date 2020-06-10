@@ -2,6 +2,9 @@ package interfaces;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class AeroportosUI extends javax.swing.JDialog {
 
@@ -9,11 +12,14 @@ public class AeroportosUI extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-                this.setIconImage(new ImageIcon(getClass().getResource("/imagens/map.png")).getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("/imagens/map.png")).getImage());
+        jTable2.getTableHeader().setResizingAllowed(false);
+        jTable2.getTableHeader().setReorderingAllowed(false);
         /*jFormattedTextField2.setFormatterFactory(null);
         jFormattedTextField5.setFormatterFactory(null);
         jFormattedTextField8.setFormatterFactory(null);
         jFormattedTextField4.setFormatterFactory(null);*/
+        //instance table model
     }
 
     @SuppressWarnings("unchecked")
@@ -49,6 +55,11 @@ public class AeroportosUI extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jFormattedTextField13 = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -111,6 +122,7 @@ public class AeroportosUI extends javax.swing.JDialog {
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, 40));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete.png"))); // NOI18N
+        jButton2.setEnabled(false);
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, -1, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -192,6 +204,48 @@ public class AeroportosUI extends javax.swing.JDialog {
         jTabbedPane1.addTab("Cadastrar  ", new javax.swing.ImageIcon(getClass().getResource("/imagens/accept.png")), jPanel4); // NOI18N
 
         jPanel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanel1ComponentShown(evt);
+            }
+        });
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(452, 300));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTable2.setToolTipText("");
+        jTable2.setAutoscrolls(false);
+        jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jScrollPane2.setViewportView(jTable2);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 10, 460, -1));
+
+        jPanel5.setBackground(new java.awt.Color(171, 193, 217));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel5.setMinimumSize(new java.awt.Dimension(12, 11));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        jLabel27.setText("País com mais aeroportos cadastrados:");
+        jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -2, -1, 20));
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        jLabel28.setText("Total de aeroportos:");
+        jPanel5.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, -2, -1, 20));
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 490, 20));
+
         jTabbedPane1.addTab("Lista  ", new javax.swing.ImageIcon(getClass().getResource("/imagens/application_view_list.png")), jPanel1); // NOI18N
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 490, 370));
@@ -231,6 +285,41 @@ public class AeroportosUI extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextField13ActionPerformed
 
+    private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1ComponentShown
+        try
+        {
+            
+            jLabel28.setText("Total de aeroportos: " + 90);
+            jLabel27.setText("País com mais aeroportos cadastrados: " + "República Dominicana");
+            
+            DefaultTableModel model = new DefaultTableModel()
+            {
+                @Override
+                public boolean isCellEditable(int row, int column) 
+                {
+                    return false;
+                }   
+            };
+
+            model.addColumn("IATA");
+            model.addColumn("ICAO");
+            model.addColumn("Nome");
+            model.addColumn("País");
+            model.addColumn("Cidade");
+            
+            model.addRow(new Object[]{"ee",
+                                      "ee",
+                                      "ee",
+                                      "ee",
+                                      "ee"});
+            
+            jTable2.setModel(model);
+            formatarColunasDaTabela(); 
+        }
+        catch (Exception erro)
+        {}       
+    }//GEN-LAST:event_jPanel1ComponentShown
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -266,6 +355,8 @@ public class AeroportosUI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -274,12 +365,38 @@ public class AeroportosUI extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 
     public static boolean isNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+    }
+    
+    private void formatarColunasDaTabela() 
+    {
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(40);
+        jTable2.getColumnModel().getColumn(1).setPreferredWidth(40);
+        jTable2.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTable2.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jTable2.getColumnModel().getColumn(4).setPreferredWidth(100);
+        
+        DefaultTableCellRenderer esquerda = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
+
+        esquerda.setHorizontalAlignment(SwingConstants.LEFT);
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        direita.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        jTable2.getColumnModel().getColumn(0).setCellRenderer(direita);
+        jTable2.getColumnModel().getColumn(1).setCellRenderer(esquerda);
+        jTable2.getColumnModel().getColumn(2).setCellRenderer(esquerda);
+        jTable2.getColumnModel().getColumn(3).setCellRenderer(esquerda);
+        jTable2.getColumnModel().getColumn(4).setCellRenderer(centralizado);
     }
 }
