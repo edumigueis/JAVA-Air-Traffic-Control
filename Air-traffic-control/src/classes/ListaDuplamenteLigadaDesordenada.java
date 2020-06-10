@@ -1,11 +1,8 @@
+package classes;
+
 import java.lang.reflect.*;
 
-public class ListaDuplamenteLigadaOrdenada <X extends Comparable<X>>
-// X extends Comparable<X> indica que só serão aceitas, como
-// parâmetros da classe ListaDuplamenteLigadaOrdenada, classe que herdem
-// da interface Comparable<X>, ou seja, apenas Xs comparáveis
-// com outros Xs serão aceitos; isso garante que posso usar o
-// método compareTo com objetos chamantes do tipo X.
+public class ListaDuplamenteLigadaDesordenada <X>
 {
     protected class No
     {
@@ -71,10 +68,10 @@ public class ListaDuplamenteLigadaOrdenada <X extends Comparable<X>>
 
     protected No primeiro, ultimo;
 
-    public ListaDuplamenteLigadaOrdenada ()
+    public ListaDuplamenteLigadaDesordenada ()
     {
-        this.primeiro=this.ultimo=null;
-    }
+		this.primeiro=this.ultimo=null;
+	}
 
     protected X meuCloneDeX (X x)
     {
@@ -91,80 +88,54 @@ public class ListaDuplamenteLigadaOrdenada <X extends Comparable<X>>
             ret = (X)metodo.invoke(x,parms);
         }
         catch (Exception erro)
-        {} // pq sei que estou chamando clone de um objeto que é Cloneable e, portanto, nao há risco do método não existir ou de ser chamado com parametros errado
+        {} // pq sei que estou chamando clone de um objeto que Ã© Cloneable e, portanto, nao hÃ¡ risco do mÃ©todo nÃ£o existir ou de ser chamado com parametros errado
 
         return ret;
     }
 
-    // retirei o método public void insiraNoInicio (X i) throws Exception
-    // pois ele não faz sentido neste tipo de lista
-
-    // retirei o método public void insiraNoFim (X i) throws Exception
-    // pois ele não faz sentido neste tipo de lista
-
-    // novo método que insere, mantendo a ordem
-    public void insira (X i) throws Exception
+    public void insiraNoInicio (X i) throws Exception
     {
         if (i==null)
             throw new Exception ("Informacao ausente");
 
-        X inserir;
+        X inserir=null;
         if (i instanceof Cloneable)
             inserir = meuCloneDeX (i);
         else
             inserir = i;
+            
+        this.primeiro = new No (null,inserir,this.primeiro);
 
-        if (this.primeiro==null)
-        {
-            this.primeiro = this.ultimo = new No (inserir);
-            return;
-        }
+        if (this.primeiro.getProx()!=null)
+            this.primeiro.getProx().setAnte (this.primeiro);
 
-        int comp=inserir.compareTo(this.primeiro.getInfo());
-
-        if (comp<0)
-        {
-            this.primeiro = new No (null,inserir,this.primeiro);
-
-			if (this.primeiro.getProx()!=null)
-				this.primeiro.getProx().setAnte (this.primeiro);
-
-			this.primeiro.setAnte (null);
+        this.primeiro.setAnte (null);
         
-			if (this.ultimo==null)
-				this.ultimo=this.primeiro;
-				
-            return;
-        }
+        if (this.ultimo==null)
+            this.ultimo=this.primeiro;
+    }
 
-        if (comp==0)
-            throw new Exception ("Informacao repetida");
+    public void insiraNoFim (X i) throws Exception
+    {
+        if (i==null)
+            throw new Exception ("Informacao ausente");
 
-        No atual=this.primeiro;
-
-        for(;;)
-        {
-            if (atual.getProx()==null)
-                break;
-
-            comp=i.compareTo(atual.getProx().getInfo());
-
-            if (comp==0)
-                throw new Exception ("Informacao repetida");
-
-            if (comp<0)
-                break;
-
-            atual=atual.getProx();
-        }
-
-        atual.setProx (new No (atual,inserir,atual.getProx()));
-        atual = atual.getProx();
-        
-        if (atual.getProx() == null)
-            this.ultimo = atual;
+        X inserir=null;
+        if (i instanceof Cloneable)
+            inserir = meuCloneDeX (i);
         else
-            atual.getProx().setAnte(atual);
+            inserir = i;
+            
+        if (this.ultimo==null) // && this.primeiro==null
+        {
+            this.ultimo   = new No (inserir);
+            this.primeiro = this.ultimo;
+        }
+        else
+        {
+            this.ultimo.setProx (new No (this.ultimo,inserir,null));
+            this.ultimo = this.ultimo.getProx();
+        }
     }
     
     public void removaDoInicio () throws Exception
@@ -215,7 +186,7 @@ public class ListaDuplamenteLigadaOrdenada <X extends Comparable<X>>
 
         No atual=this.primeiro;
 
-        for(;;) // FOR EVER (repete até Exception ou return)
+        for(;;) // FOR EVER (repete atÃ© Exception ou return)
         {
             if (atual==null)
                 throw new Exception ("Informacao inexistente");
@@ -257,9 +228,9 @@ public class ListaDuplamenteLigadaOrdenada <X extends Comparable<X>>
     
     public boolean tem (X i) throws Exception
     {
-        if (i==null)
-            throw new Exception ("Informacao ausente");
-        
+		if (i==null)
+		    throw new Exception ("Informacao ausente");
+		
         No atual=this.primeiro;
 
         while (atual!=null)
@@ -311,16 +282,60 @@ public class ListaDuplamenteLigadaOrdenada <X extends Comparable<X>>
         return ret;
     }
 
-    public boolean isvazia ()
+    public boolean isVazia ()
     {
         return this.primeiro==null/*&&this.ultimo==null*/;
     }
 
-    // retirei o método public void invertaSe ()
-    // pois ele não faz sentido neste tipo de lista
+    public void invertaSe ()
+    {
+		if (this.primeiro==null)
+		    return; // lista vazia; nao hÃ¡ o que inverter
+		    
+		if (this.primeiro.getProx() == null)
+		    return; // lista com um elemento sÃ³; nao ha o que inverter
+		    
+		// tendo 2 ou mais nÃ³s, percorre invertendo
+        No backup, atual=this.primeiro;
+        while (atual!=null)
+        {
+			backup = atual.getProx();
+			atual.setProx (atual.getAnte());
+			atual.setAnte (backup);
+			atual = backup;
+		}
+		
+		// this.primeiro vira this.ultimo e vice-versa 
+		backup        = this.primeiro;
+		this.primeiro = this.ultimo;
+		this.ultimo   = backup;
+    }
 
-    // retirei o método public ListaSimplesDesordenada<X> inversao ()
-    // pois ele não faz sentido neste tipo de lista
+    public ListaDuplamenteLigadaDesordenada<X> inversao ()
+    {
+        ListaDuplamenteLigadaDesordenada<X> ret =
+        new ListaDuplamenteLigadaDesordenada<X> ();
+        
+        for (No atual=this.primeiro; atual!=null; atual=atual.getProx())
+        {
+            // preferi nao usar this.insiraNoInicio pelo bem da eficiencia,
+            // economizando tempo, deixando de validar, e economizando
+            // memÃ³ria e tempo, deixando de clonar; e fica a pergunta:
+            // entendem porque nÃ£o Ã© necessario clonar? Nao entendendo,
+            // monitoria!
+            ret.primeiro = new No (null,atual.getInfo(),ret.primeiro);
+
+			if (ret.primeiro.getProx()!=null)
+				ret.primeiro.getProx().setAnte (ret.primeiro);
+
+			ret.primeiro.setAnte (null);
+			
+			if (ret.ultimo==null)
+				ret.ultimo=ret.primeiro;
+		}
+
+        return ret;
+	}
 
     public String toString ()
     {
@@ -352,8 +367,8 @@ public class ListaDuplamenteLigadaOrdenada <X extends Comparable<X>>
         if (this.getClass()!=obj.getClass())
             return false;
 
-        ListaDuplamenteLigadaOrdenada<X> lista =
-       (ListaDuplamenteLigadaOrdenada<X>)obj;
+        ListaDuplamenteLigadaDesordenada<X> lista =
+       (ListaDuplamenteLigadaDesordenada<X>)obj;
 
         No atualThis =this .primeiro;
         No atualLista=lista.primeiro;
@@ -379,7 +394,7 @@ public class ListaDuplamenteLigadaOrdenada <X extends Comparable<X>>
 
     public int hashCode ()
     {
-        final int PRIMO = 13; // qualquer número primo serve
+        final int PRIMO = 13; // qualquer nÃºmero primo serve
         
         int ret=666; // qualquer inteiro positivo serve
 
@@ -394,13 +409,13 @@ public class ListaDuplamenteLigadaOrdenada <X extends Comparable<X>>
     }
 
     // construtor de copia
-    public ListaDuplamenteLigadaOrdenada (ListaDuplamenteLigadaOrdenada<X> modelo) throws Exception
+    public ListaDuplamenteLigadaDesordenada (ListaDuplamenteLigadaDesordenada<X> modelo) throws Exception
     {
         if (modelo==null)
             throw new Exception ("Modelo ausente");
 
         if (modelo.primeiro==null)
-            return; // sai do construtor, pq this.primeiro ja é null
+            return; // sai do construtor, pq this.primeiro ja Ã© null
 
         this.primeiro = new No (modelo.primeiro.getInfo());
 
@@ -419,14 +434,14 @@ public class ListaDuplamenteLigadaOrdenada <X extends Comparable<X>>
 
     public Object clone ()
     {
-        ListaDuplamenteLigadaOrdenada<X> ret=null;
+        ListaDuplamenteLigadaDesordenada<X> ret=null;
 
         try
         {
-            ret = new ListaDuplamenteLigadaOrdenada (this);
+            ret = new ListaDuplamenteLigadaDesordenada (this);
         }
         catch (Exception erro)
-        {} // sei que this NUNCA é null e o contrutor de copia da erro quando seu parametro é null
+        {} // sei que this NUNCA Ã© null e o contrutor de copia da erro quando seu parametro Ã© null
 
         return ret;
     }

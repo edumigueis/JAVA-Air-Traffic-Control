@@ -11,66 +11,90 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Eduardo Migueis, Rodrigo Smith and Manuela Benassi.
  * @since 2020.
  */
-public class Voo {
+public class Voo implements Cloneable
+{
+
     private int idVoo;
     static AtomicInteger nextId = new AtomicInteger();
     private int numeroVoo = 0;
     private String aeroOrigem = "";
     private String aeroDestino = "";
     private String companhiaOperadora = "";
-    
-    public Voo(int numeroVoo, String companhiaOperadora, String aeroOrigem, String aeroDestino){
+
+    public Voo(int numeroVoo, String companhiaOperadora, String aeroOrigem, String aeroDestino) 
+    {
         this.numeroVoo = numeroVoo;
         this.aeroOrigem = aeroOrigem;
         this.aeroDestino = aeroDestino;
         this.companhiaOperadora = companhiaOperadora;
         this.idVoo = nextId.incrementAndGet();
     }
-    
-    public int getNumeroVoo(){
+
+    public int getNumeroVoo() 
+    {
         return this.numeroVoo;
     }
-    public String getCompanhiaOperadora(){
+
+    public String getCompanhiaOperadora() 
+    {
         return this.companhiaOperadora;
     }
-    public String getAeroOrigem(){
+
+    public String getAeroOrigem() 
+    {
         return this.aeroOrigem;
     }
-    public String getAeroDestino(){
+
+    public String getAeroDestino() 
+    {
         return this.aeroDestino;
     }
-    
-    
-    public void setCompanhiaOperadora(String comp) throws Exception
+
+    public void setCompanhiaOperadora(String comp) throws Exception 
     {
-        if(comp.equals("")){
+        if (comp.equals(""))
+        {
             throw new Exception("Nome da companhia inválido.");
+        } 
+        else 
+        {
+            this.companhiaOperadora = comp;
         }
-        else
-        this.companhiaOperadora = comp;
     }
-    public void setAeroOrigem(String aerOr) throws Exception
+
+    public void setAeroOrigem(String aerOr) throws Exception 
     {
-        if(aerOr.equals("")){
+        if (aerOr.equals("")) 
+        {
             throw new Exception("Nome do aeroporto de origem inválido.");
+        } 
+        else 
+        {
+            this.aeroOrigem = aerOr;
         }
-        else
-        this.aeroOrigem = aerOr;
     }
-    public void setAeroDestino(String aerDes) throws Exception
+
+    public void setAeroDestino(String aerDes) throws Exception 
     {
-        if(aerDes.equals("")){
+        if (aerDes.equals("")) 
+        {
             throw new Exception("Nome do aeroporto de destino inválido.");
+        } 
+        else {
+            this.aeroDestino = aerDes;
         }
-        else
-        this.aeroDestino = aerDes;
     }
-    public void setNumeroVoo(int nmr) throws Exception
+
+    public void setNumeroVoo(int nmr) throws Exception 
     {
-        if(nmr < 0){
+        if (nmr < 0) 
+        {
             throw new Exception("Numero do voo inválido.");
+        } 
+        else 
+        {
+            this.numeroVoo = nmr;
         }
-        else
-        this.numeroVoo = nmr;
     }
+    
 }

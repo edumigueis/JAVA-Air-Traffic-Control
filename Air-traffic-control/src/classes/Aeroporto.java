@@ -11,7 +11,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Eduardo Migueis, Rodrigo Smith and Manuela Benassi.
  * @since 2020.
  */
-public class Aeroporto {
+public class Aeroporto implements Cloneable
+{
     static AtomicInteger nextId = new AtomicInteger();
     private int idAeroporto;
     private String codigoIATA = "";
@@ -19,39 +20,47 @@ public class Aeroporto {
     private String nomeAero = "";
     private String pais = "";
     private String cidade = "";
-    private ListaDuplamenteLigadaOrdenada<Voo> listaVoos;
+    private final ListaDuplamenteLigadaDesordenada<Voo> listaVoos;
     
-    public Aeroporto(String codigoIATA, String codigoICAO, String nome, String pais, String cidade){
+    public Aeroporto(String codigoIATA, String codigoICAO, String nome, String pais, String cidade)
+    {
         this.codigoIATA = codigoIATA;
         this.codigoICAO = codigoICAO;
         this.nomeAero = nome;
         this.pais = pais;
         this.cidade = cidade;
-        this.listaVoos = new ListaDuplamenteLigadaOrdenada<Voo>();
+        this.listaVoos = new ListaDuplamenteLigadaDesordenada<Voo>();
         this.idAeroporto = nextId.incrementAndGet();
     }
     
-    public String getCodigoIATA(){
+    public String getCodigoIATA()
+    {
         return this.codigoIATA;
     }
-    public String getCodigoICAO(){
+    public String getCodigoICAO()
+    {
         return this.codigoICAO;
     }
-    public String getNome(){
+    public String getNome()
+    {
         return this.nomeAero;
     }
-    public String getPais(){
+    public String getPais()
+    {
         return this.pais;
     }
-    public String getCidade(){
+    public String getCidade()
+    {
         return this.cidade;
     }
-    public ListaDuplamenteLigadaOrdenada<Voo> getVoos(){
+    public ListaDuplamenteLigadaDesordenada<Voo> getVoos()
+    {
         return this.listaVoos;
     }
     public void setCodigoIATA(String codigo) throws Exception
     {
-        if(codigo.equals("")){
+        if(codigo.equals(""))
+        {
             throw new Exception("Código IATA inválido.");
         }
         else
@@ -59,7 +68,8 @@ public class Aeroporto {
     }
     public void setCodigoICAO(String codigo) throws Exception
     {
-        if(codigo.equals("")){
+        if(codigo.equals(""))
+        {
             throw new Exception("Código ICAO inválido.");
         }
         else
@@ -67,7 +77,8 @@ public class Aeroporto {
     }
     public void setNome(String nome) throws Exception
     {
-        if(nome.equals("")){
+        if(nome.equals(""))
+        {
             throw new Exception("Nome inválido.");
         }
         else
@@ -75,7 +86,8 @@ public class Aeroporto {
     }
     public void setPais(String pais) throws Exception
     {
-        if(pais.equals("")){
+        if(pais.equals(""))
+        {
             throw new Exception("País inválido.");
         }
         else
@@ -83,10 +95,12 @@ public class Aeroporto {
     }
     public void setCidade(String cidade) throws Exception
     {
-        if(cidade.equals("")){
+        if(cidade.equals(""))
+        {
             throw new Exception("Cidade inválida.");
         }
         else
         this.cidade = cidade;
     }
+    
 }
