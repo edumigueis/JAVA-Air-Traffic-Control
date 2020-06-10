@@ -2,14 +2,21 @@ package interfaces;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
-public class VoosUI extends javax.swing.JDialog {
-
+public class VoosUI extends javax.swing.JDialog 
+{
+    boolean isClickeable = false;
+    
     public VoosUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagens/arrow_branch.png")).getImage());
+        jTable2.getTableHeader().setResizingAllowed(false);
+        jTable2.getTableHeader().setReorderingAllowed(false);
         /*jFormattedTextField2.setFormatterFactory(null);
         jFormattedTextField5.setFormatterFactory(null);
         jFormattedTextField8.setFormatterFactory(null);
@@ -45,6 +52,11 @@ public class VoosUI extends javax.swing.JDialog {
         jFormattedTextField10 = new javax.swing.JFormattedTextField();
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -84,17 +96,25 @@ public class VoosUI extends javax.swing.JDialog {
         jFormattedTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel2.add(jFormattedTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 130, 40));
 
+        jFormattedTextField8.setEditable(false);
         jFormattedTextField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel2.add(jFormattedTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 220, 30));
 
+        jFormattedTextField11.setEditable(false);
         jFormattedTextField11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel2.add(jFormattedTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 220, 30));
 
+        jFormattedTextField12.setEditable(false);
         jFormattedTextField12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel2.add(jFormattedTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 220, 30));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete.png"))); // NOI18N
         jButton2.setEnabled(false);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, 40));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/magnifier.png"))); // NOI18N
@@ -119,10 +139,8 @@ public class VoosUI extends javax.swing.JDialog {
         jLabel11.setToolTipText("");
         jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
-        jComboBox3.setEditable(true);
         jPanel4.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 220, 30));
 
-        jComboBox4.setEditable(true);
         jPanel4.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 220, 30));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -144,6 +162,48 @@ public class VoosUI extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(219, 219, 225));
         jPanel1.setToolTipText("");
         jPanel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanel1ComponentShown(evt);
+            }
+        });
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(452, 300));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTable2.setToolTipText("");
+        jTable2.setAutoscrolls(false);
+        jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jScrollPane2.setViewportView(jTable2);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 10, 460, -1));
+
+        jPanel5.setBackground(new java.awt.Color(171, 193, 217));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel5.setMinimumSize(new java.awt.Dimension(12, 11));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        jLabel27.setText("Companhia aérea com mais voos:");
+        jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -2, -1, 20));
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        jLabel28.setText("Total de voos:");
+        jPanel5.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, -2, -1, 20));
+
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 490, 20));
+
         jTabbedPane1.addTab("Lista  ", new javax.swing.ImageIcon(getClass().getResource("/imagens/application_view_list.png")), jPanel1); // NOI18N
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 490, 370));
@@ -158,6 +218,45 @@ public class VoosUI extends javax.swing.JDialog {
     private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
 
     }//GEN-LAST:event_jPanel2ComponentShown
+
+    private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1ComponentShown
+         try
+        {
+            
+            jLabel28.setText("Total de voos: " + 90);
+            jLabel27.setText("Companhia aérea com mais voos: " + "TAM");
+            
+            DefaultTableModel model = new DefaultTableModel()
+            {
+                @Override
+                public boolean isCellEditable(int row, int column) 
+                {
+                    return false;
+                }   
+            };
+
+            model.addColumn("Nº voo");
+            model.addColumn("Aeroporto de origem");
+            model.addColumn("Aeroporto de destino");
+            model.addColumn("Companhia aérea");
+            
+            model.addRow(new Object[]{"ee",
+                                      "ee",
+                                      "ee",
+                                      "ee",
+                                      "ee"});
+            
+            jTable2.setModel(model);
+            formatarColunasDaTabela(); 
+        }
+        catch (Exception erro)
+        {}       
+    }//GEN-LAST:event_jPanel1ComponentShown
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        if (!isClickeable)
+            return;
+    }//GEN-LAST:event_jButton2MouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -192,19 +291,47 @@ public class VoosUI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 
 
     public static boolean isNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+    }
+    
+    private void formatarColunasDaTabela() 
+    {
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(30);
+        jTable2.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jTable2.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTable2.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jTable2.getColumnModel().getColumn(4).setPreferredWidth(100);
+        
+        DefaultTableCellRenderer esquerda = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
+
+        esquerda.setHorizontalAlignment(SwingConstants.LEFT);
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        direita.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        jTable2.getColumnModel().getColumn(0).setCellRenderer(direita);
+        jTable2.getColumnModel().getColumn(1).setCellRenderer(esquerda);
+        jTable2.getColumnModel().getColumn(2).setCellRenderer(esquerda);
+        jTable2.getColumnModel().getColumn(3).setCellRenderer(esquerda);
+        jTable2.getColumnModel().getColumn(4).setCellRenderer(centralizado);
     }
 }
