@@ -5,6 +5,11 @@ package classes;
  * @author Rodrigo
  */
 public class Paises {
+    /**
+     * @classe de vetor que contém os países dos voos
+     * 
+     * @param PAISES
+     */
 
     public final static String[] PAISES = new String[]{"Afghanistan",
         "Albania",
