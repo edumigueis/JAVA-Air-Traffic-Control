@@ -96,5 +96,54 @@ public class Voo implements Cloneable
             this.numeroVoo = nmr;
         }
     }
+    public String toString(){
+        return "Número do voo: " + numeroVoo + " " + ", aeroporto de origem " + aeroOrigem + ", aeroporto de destino:  " + aeroDestino +
+        ", companhia operadora: " + companhiaOperadora + ", idVoo: " + idVoo ;
+    }
     
+    public int haschCode(){
+        int ret = 111;
+        ret = ret *5 + this.aeroDestino.hashCode();
+        ret = ret * 5 + this.aeroOrigem.hashCode();
+        ret = ret * 5 + this.companhiaOperadora.hashCode();
+        ret = ret * 5 + new Integer(this.numeroVoo).haschCode();
+        ret = ret * 5 + new Integer(this.idVoo).haschCode();
+        if(ret<0)
+            ret = -ret;
+
+        return ret;
+    }
+    public Object clone(){
+        Voo clone = null;
+        try{
+            clone = new Voo(this);
+        }
+        catch(Exception e){}
+        return clone;
+
+    }
+    public boolean equals(Object obj){
+        if(obj == null)
+            return false;
+        if(obj == this)
+            return true;
+        if(obj.getClass() != this.getClass())
+            return false;
+        Voo voo = (Voo) obj;
+        if(!this.aeroDestino.equals(voo.aeroDestino) || !this.aeroOrigem.equals(voo.aeroOrigem) || !this.companhiaOperadora.equals(voo.companhiaOperadora) ||
+        this.idVoo != voo.idVoo || this.numeroVoo != voo.numeroVoo)
+            return false;
+        return true;
+    }
+    public Voo(Voo modelo){
+        if(modelo == null){
+            throw new Exception("modelo para cópia não pode ser nulo");
+        }
+        this.aeroDestino = modelo.aeroDestino;
+        this.companhiaOperadora = modelo.companhiaOperadora;
+        this.idVoo = modelo.idVoo;
+        this.nomeAero = modelo.nomeAero;
+        this.aeroOrigem = modelo.aeroOrigem;
+    }
+
 }
