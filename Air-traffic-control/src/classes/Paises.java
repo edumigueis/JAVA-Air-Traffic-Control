@@ -6,7 +6,7 @@ package classes;
  */
 public class Paises {
     /**
-     * @classe de vetor que contém os países dos voos
+     * classe de vetor que contém os países dos voos
      * 
      * @param PAISES
      */

@@ -41,31 +41,60 @@ public class Aeroporto implements Cloneable
         this.listaVoos = new ListaDuplamenteLigadaDesordenada<Voo>();
         this.idAeroporto = nextId.incrementAndGet();
     }
+    /**
+     * Pega o codigoIATA
+     * @return codigoIATA
+     */
     
     public String getCodigoIATA()
     {
         return this.codigoIATA;
     }
+    /**
+     * Pega o codigoICAO
+     * @return codigoICAO
+     */
     public String getCodigoICAO()
     {
         return this.codigoICAO;
     }
+    /**
+     * Pega o nome do aeroporto
+     * @return nomeAero
+     */
     public String getNome()
     {
         return this.nomeAero;
     }
+    /**
+     * Pega o país
+     * @return pais
+     */
     public String getPais()
     {
         return this.pais;
     }
+    /**
+     * Pega a cidade
+     * @return cidade
+     */
     public String getCidade()
     {
         return this.cidade;
     }
+    /**
+     * Pega os voos da lista
+     * @return
+     */
     public ListaDuplamenteLigadaDesordenada<Voo> getVoos()
     {
         return this.listaVoos;
     }
+    /**
+     * Dá o valor do parametro ao Código IATA
+     * @param codigo
+     * @throws Exception Código IATA é inválido
+     */
     public void setCodigoIATA(String codigo) throws Exception
     {
         if(codigo.equals(""))
@@ -75,6 +104,11 @@ public class Aeroporto implements Cloneable
         else
         this.codigoIATA = codigo;
     }
+    /**
+     * Dá o valor do parametro ao Código ICAO
+     * @param codigo
+     * @throws Exception Código ICAO é inválido
+     */
     public void setCodigoICAO(String codigo) throws Exception
     {
         if(codigo.equals(""))
@@ -84,6 +118,11 @@ public class Aeroporto implements Cloneable
         else
         this.codigoICAO = codigo;
     }
+    /**
+     * Dá o valor do parametro ao nome
+     * @param nome
+     * @throws Exception nome passado é inválido
+     */
     public void setNome(String nome) throws Exception
     {
         if(nome.equals(""))
@@ -93,6 +132,11 @@ public class Aeroporto implements Cloneable
         else
         this.nomeAero = nome;
     }
+    /**
+     * Dá o valor do parametro ao pais
+     * @param pais
+     * @throws Exception país passado é inválido
+     */
     public void setPais(String pais) throws Exception
     {
         if(pais.equals(""))
@@ -102,6 +146,11 @@ public class Aeroporto implements Cloneable
         else
         this.pais = pais;
     }
+    /**
+     * Dá o valor do parametro a cidade
+     * @param cidade
+     * @throws Exception cidade passada é inválido
+     */
     public void setCidade(String cidade) throws Exception
     {
         if(cidade.equals(""))
@@ -111,11 +160,19 @@ public class Aeroporto implements Cloneable
         else
         this.cidade = cidade;
     }
+     /**
+     * Constrói uma string que representa a classe
+     * @return uma string com os atributos
+     */
     public String toString(){
         return "IdAeroporto: " + this.idAeroporto + "" + " codigo IATA: " + codigoIATA + " codigo ICAO " + codigoICAO +
         " nome areporto " + nomeAero + " pais: " + pais + " cidade " + cidade;
 
     }
+    /**
+     * Constrói o haschCode da classe
+     * @return haschCode da classe
+     */
     public int haschCode(){
         int ret = 111;
         ret = ret *5 + this.cidade.hashCode();
@@ -129,6 +186,10 @@ public class Aeroporto implements Cloneable
 
         return ret;
     }
+     /**
+     * Clona a classe
+     * @return o clone
+     */
     public Object clone(){
         Aeroporto clone = null;
         try{
@@ -138,6 +199,11 @@ public class Aeroporto implements Cloneable
         return clone;
 
     }
+    /**
+     * Compara se a classe passada é igual a essa
+     * @param obj
+     * @return
+     */
     public boolean equals(Object obj){
         if(obj == null)
             return false;
@@ -151,6 +217,10 @@ public class Aeroporto implements Cloneable
             return false;
         return true;
     }
+     /**
+     * Atribui os valores do modelo a essa classe
+     * @param modelo
+     */
     public Aeroporto(Aeroporto modelo){
         if(modelo == null){
             throw new Exception("modelo para cópia não pode ser nulo");
