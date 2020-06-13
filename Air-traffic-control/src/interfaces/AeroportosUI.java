@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
 
 public class AeroportosUI extends javax.swing.JDialog 
 {
@@ -18,22 +19,9 @@ public class AeroportosUI extends javax.swing.JDialog
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagens/map.png")).getImage());
         jTable2.getTableHeader().setResizingAllowed(false);
-        jTable2.getTableHeader().setReorderingAllowed(false); 
+        jTable2.getTableHeader().setReorderingAllowed(false);
         jComboBox4.setModel(new DefaultComboBoxModel(Paises.PAISES));
         lista = parent.getListaAeroportos();
-        Aeroporto aero = new Aeroporto("GRU","HUY","Aeroporto de Beverly Hills", "Brasil", "São Paulo");
-        Aeroporto aero2 = new Aeroporto("CAD","HOU","Aeroporto de Beverly Hills", "Brasil", "São Paulo");
-        Aeroporto aero3 = new Aeroporto("CDG","FTYI","Aeroporto de Beverly Hills", "França", "Paris");
-        
-        
-        try{
-        lista.insiraNoFim(aero);
-        lista.insiraNoFim(aero2);
-        lista.insiraNoFim(aero3);
-        }
-        catch(Exception ex){
-        }
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -255,8 +243,7 @@ public class AeroportosUI extends javax.swing.JDialog
 
     private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1ComponentShown
         try
-        {
-            
+        {           
             jLabel28.setText("Total de aeroportos: " + 90);
             jLabel27.setText("País com mais aeroportos cadastrados: " + "República Dominicana");
             
@@ -296,17 +283,17 @@ public class AeroportosUI extends javax.swing.JDialog
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         if(jFormattedTextField12.getText().equals("") || jFormattedTextField13.getText().equals("") || jFormattedTextField8.getText().equals("") || jComboBox4.getSelectedItem().toString().equals("")|| jFormattedTextField10.getText().equals(""))
         {
+            JOptionPane.showMessageDialog(null, "Todos os dados devem ser preenchidos", " Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
         try
         {
             Aeroporto aeroporto = new Aeroporto(jFormattedTextField12.getText(),jFormattedTextField13.getText(), jFormattedTextField8.getText(),jComboBox4.getSelectedItem().toString(), jFormattedTextField10.getText());
             this.lista.insiraNoFim(aeroporto);
+            limparTelaCadastro();
         } 
         catch(Exception ex)
-        {
-            
-        }
+        {}
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -347,12 +334,11 @@ public class AeroportosUI extends javax.swing.JDialog
                         }
                     }
             }
+            
+            limparTelaConsulta();
         }
         catch(Exception ex)
-        {
-        
-        }
-        
+        {}       
     }//GEN-LAST:event_jButton1MouseClicked
 
     public static void main(String args[]) {
@@ -407,11 +393,7 @@ public class AeroportosUI extends javax.swing.JDialog
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
-
-    public static boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
-    }
-    
+  
     private void formatarColunasDaTabela() 
     {
         jTable2.getColumnModel().getColumn(0).setPreferredWidth(40);
@@ -433,5 +415,23 @@ public class AeroportosUI extends javax.swing.JDialog
         jTable2.getColumnModel().getColumn(2).setCellRenderer(esquerda);
         jTable2.getColumnModel().getColumn(3).setCellRenderer(esquerda);
         jTable2.getColumnModel().getColumn(4).setCellRenderer(centralizado);
+    }
+    
+    private void limparTelaCadastro()
+    {
+        jFormattedTextField8.setText("");
+        jFormattedTextField10.setText("");
+        jFormattedTextField12.setText("");
+        jFormattedTextField13.setText("");
+        jComboBox4.setSelectedIndex(0);
+    }
+    
+    private void limparTelaConsulta()
+    {
+        jFormattedTextField3.setText("");
+        jFormattedTextField11.setText("");
+        jFormattedTextField4.setText("");
+        jFormattedTextField5.setText("");
+        jFormattedTextField6.setText("");
     }
 }
