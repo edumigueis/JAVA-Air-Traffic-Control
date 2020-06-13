@@ -22,8 +22,8 @@ public class AeroportosUI extends javax.swing.JDialog
         jComboBox4.setModel(new DefaultComboBoxModel(Paises.PAISES));
         lista = parent.getListaAeroportos();
         Aeroporto aero = new Aeroporto("GRU","HUY","Aeroporto de Beverly Hills", "Brasil", "São Paulo");
-        Aeroporto aero2 = new Aeroporto("GRU","HUY","Aeroporto de Beverly Hills", "Brasil", "São Paulo");
-        Aeroporto aero3 = new Aeroporto("GRU","HUY","Aeroporto de Beverly Hills", "Brasil", "São Paulo");
+        Aeroporto aero2 = new Aeroporto("CAD","HOU","Aeroporto de Beverly Hills", "Brasil", "São Paulo");
+        Aeroporto aero3 = new Aeroporto("CDG","FTYI","Aeroporto de Beverly Hills", "França", "Paris");
         
         
         try{
@@ -316,27 +316,34 @@ public class AeroportosUI extends javax.swing.JDialog
             {
                 if(!jFormattedTextField3.getText().equals("") && !jFormattedTextField11.getText().equals(""))
                 {
-                    if(lista.getPos(i).getCodigoIATA().equals(jFormattedTextField11.getText()))
+                    if(lista.getPos(i).getCodigoIATA().equals(jFormattedTextField3.getText().toUpperCase()))
                     {
-                        Aeroporto ae = lista.getPos(i);
-                    
+                        jFormattedTextField4.setText(lista.getPos(i).getNome());
+                        jFormattedTextField5.setText(lista.getPos(i).getPais());
+                        jFormattedTextField6.setText(lista.getPos(i).getCidade());
                     }
                 }
                 else
                     if(jFormattedTextField3.getText().equals(""))
                     {
-                        if(lista.getPos(i).getCodigoICAO().equals(jFormattedTextField11.getText()))
+                        String cu1 = lista.getPos(i).getCodigoICAO();
+                        String cu = jFormattedTextField11.getText().toUpperCase();
+                        if(lista.getPos(i).getCodigoICAO().equals(jFormattedTextField11.getText().toUpperCase()))
                         {
-                            Aeroporto ae = lista.getPos(i);
-
+                            jFormattedTextField3.setText(lista.getPos(i).getCodigoIATA());
+                            jFormattedTextField4.setText(lista.getPos(i).getNome());
+                            jFormattedTextField5.setText(lista.getPos(i).getPais());
+                            jFormattedTextField6.setText(lista.getPos(i).getCidade());
                         }
                     } 
                     else
                     {
                         if(lista.getPos(i).getCodigoIATA().equals(jFormattedTextField3.getText()))
                         {
-                            Aeroporto ae = lista.getPos(i);
-
+                            jFormattedTextField3.setText(lista.getPos(i).getCodigoICAO());
+                            jFormattedTextField4.setText(lista.getPos(i).getNome());
+                            jFormattedTextField5.setText(lista.getPos(i).getPais());
+                            jFormattedTextField6.setText(lista.getPos(i).getCidade());
                         }
                     }
             }

@@ -265,7 +265,7 @@ public class ListaDuplamenteLigadaDesordenada <X>
             throw new Exception ("Nada a obter");
 
         No  atual=this.primeiro;
-        int ret  = 0;
+        int ret  = 1;
 
         while (atual!=null && ret <= pos)
         {
