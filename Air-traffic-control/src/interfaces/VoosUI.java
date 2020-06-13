@@ -306,11 +306,6 @@ public class VoosUI extends javax.swing.JDialog
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 
-
-    public static boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
-    }
-    
     private void formatarColunasDaTabela() 
     {
         jTable2.getColumnModel().getColumn(0).setPreferredWidth(30);
