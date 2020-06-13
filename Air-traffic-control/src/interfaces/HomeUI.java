@@ -1,15 +1,25 @@
 package interfaces;
 
+import classes.ListaDuplamenteLigadaDesordenada;
+import classes.Aeroporto;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class HomeUI extends javax.swing.JFrame 
 {
+    private final ListaDuplamenteLigadaDesordenada<Aeroporto> listaAeroportos;
+    
+    public ListaDuplamenteLigadaDesordenada<Aeroporto> getListaAeroportos()
+    {
+        return this.listaAeroportos;
+    }
+            
     public HomeUI() 
     {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagens/house2.png")).getImage());
+        listaAeroportos = new ListaDuplamenteLigadaDesordenada<>();
     }
     
     @SuppressWarnings("unchecked")

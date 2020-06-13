@@ -12,7 +12,7 @@ public class AeroportosUI extends javax.swing.JDialog
     boolean isClickeable = false;
     ListaDuplamenteLigadaDesordenada<Aeroporto> lista = new ListaDuplamenteLigadaDesordenada<Aeroporto>();
     
-    public AeroportosUI(java.awt.Frame parent, boolean modal) {
+    public AeroportosUI(HomeUI parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -20,11 +20,6 @@ public class AeroportosUI extends javax.swing.JDialog
         jTable2.getTableHeader().setResizingAllowed(false);
         jTable2.getTableHeader().setReorderingAllowed(false); 
         jComboBox4.setModel(new DefaultComboBoxModel(Paises.PAISES));
-        /*jFormattedTextField2.setFormatterFactory(null);
-        jFormattedTextField5.setFormatterFactory(null);
-        jFormattedTextField8.setFormatterFactory(null);
-        jFormattedTextField4.setFormatterFactory(null);*/
-        //instance table model
     }
 
     @SuppressWarnings("unchecked")
@@ -298,7 +293,7 @@ public class AeroportosUI extends javax.swing.JDialog
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AeroportosUI dialog = new AeroportosUI(new javax.swing.JFrame(), true);
+                AeroportosUI dialog = new AeroportosUI(new HomeUI(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

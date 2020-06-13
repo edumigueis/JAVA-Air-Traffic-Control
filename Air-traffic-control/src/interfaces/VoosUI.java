@@ -1,7 +1,8 @@
 package interfaces;
 
+import classes.Aeroporto;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -10,17 +11,24 @@ public class VoosUI extends javax.swing.JDialog
 {
     boolean isClickeable = false;
     
-    public VoosUI(java.awt.Frame parent, boolean modal) {
+    public VoosUI(HomeUI parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagens/arrow_branch.png")).getImage());
         jTable2.getTableHeader().setResizingAllowed(false);
         jTable2.getTableHeader().setReorderingAllowed(false);
-        /*jFormattedTextField2.setFormatterFactory(null);
-        jFormattedTextField5.setFormatterFactory(null);
-        jFormattedTextField8.setFormatterFactory(null);
-        jFormattedTextField4.setFormatterFactory(null);*/
+        parent.getListaAeroportos().invertaSe();
+        
+        int tamanho = parent.getListaAeroportos().toArrayList().size();
+        String dados[] = new String[tamanho];
+        
+        for(int i = 0; i < tamanho; i++)
+        {
+            dados[i] = parent.getListaAeroportos().toArrayList().get(i).getNome();
+        }
+          
+        jComboBox3.setModel(new DefaultComboBoxModel(dados));
     }
 
     @SuppressWarnings("unchecked")
@@ -68,11 +76,6 @@ public class VoosUI extends javax.swing.JDialog
 
         jPanel2.setBackground(new java.awt.Color(219, 219, 225));
         jPanel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jPanel2ComponentShown(evt);
-            }
-        });
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -215,10 +218,6 @@ public class VoosUI extends javax.swing.JDialog
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
-
-    }//GEN-LAST:event_jPanel2ComponentShown
-
     private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1ComponentShown
          try
         {
@@ -261,7 +260,7 @@ public class VoosUI extends javax.swing.JDialog
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VoosUI dialog = new VoosUI(new javax.swing.JFrame(), true);
+                VoosUI dialog = new VoosUI(new HomeUI(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
