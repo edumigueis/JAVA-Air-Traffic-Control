@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
 
 public class AeroportosUI extends javax.swing.JDialog 
 {
@@ -281,12 +282,14 @@ public class AeroportosUI extends javax.swing.JDialog
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         if(jFormattedTextField12.getText().equals("") || jFormattedTextField13.getText().equals("") || jFormattedTextField8.getText().equals("") || jComboBox4.getSelectedItem().toString().equals("")|| jFormattedTextField10.getText().equals(""))
         {
+            JOptionPane.showMessageDialog(null, "Todos os dados devem ser preenchidos", " Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
         try
         {
             Aeroporto aeroporto = new Aeroporto(jFormattedTextField12.getText(),jFormattedTextField13.getText(), jFormattedTextField8.getText(),jComboBox4.getSelectedItem().toString(), jFormattedTextField10.getText());
             this.lista.insiraNoFim(aeroporto);
+            limparTelaCadastro();
         } 
         catch(Exception ex)
         {}
