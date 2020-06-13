@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 public class AeroportosUI extends javax.swing.JDialog 
 {
     boolean isClickeable = false;
+    ListaDuplamenteLigadaDesordenada<Aeroporto> lista = new ListaDuplamenteLigadaDesordenada<Aeroporto>();
     
     public AeroportosUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -157,6 +158,11 @@ public class AeroportosUI extends javax.swing.JDialog
         jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/accept.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, 40));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -272,6 +278,22 @@ public class AeroportosUI extends javax.swing.JDialog
         if (!isClickeable)
         return;
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(jFormattedTextField12.getText().equals("") || jFormattedTextField13.getText().equals("") || jFormattedTextField8.getText().equals("") || jComboBox4.getSelectedItem().toString().equals("")|| jFormattedTextField10.getText().equals(""))
+        {
+            return;
+        }
+        try
+        {
+            Aeroporto aeroporto = new Aeroporto(jFormattedTextField12.getText(),jFormattedTextField13.getText(), jFormattedTextField8.getText(),jComboBox4.getSelectedItem().toString(), jFormattedTextField10.getText());
+            this.lista.insiraNoFim(aeroporto);
+        } 
+        catch(Exception ex)
+        {
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
