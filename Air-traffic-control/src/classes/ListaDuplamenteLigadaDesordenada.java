@@ -1,9 +1,11 @@
 package classes;
 
 import java.lang.reflect.*;
+import java.util.LinkedList;
 
 public class ListaDuplamenteLigadaDesordenada <X>
 {
+
     protected class No
     {
 		private No ante;
@@ -268,6 +270,23 @@ public class ListaDuplamenteLigadaDesordenada <X>
             ret = meuCloneDeX (ret);
             
         return ret;
+    }
+    
+    public X getPos (int pos) throws Exception
+    {
+        if (this.primeiro==null/*&&this.fim==null)*/)
+            throw new Exception ("Nada a obter");
+
+        No  atual=this.primeiro;
+        int ret  = 0;
+
+        while (atual!=null && ret <= pos)
+        {
+            ret++;                
+            atual = atual.getProx();
+        }
+        
+        return atual.getInfo();
     }
 
     public X getDoFim () throws Exception

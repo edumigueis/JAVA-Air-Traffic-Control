@@ -20,11 +20,7 @@ public class AeroportosUI extends javax.swing.JDialog
         jTable2.getTableHeader().setResizingAllowed(false);
         jTable2.getTableHeader().setReorderingAllowed(false); 
         jComboBox4.setModel(new DefaultComboBoxModel(Paises.PAISES));
-        /*jFormattedTextField2.setFormatterFactory(null);
-        jFormattedTextField5.setFormatterFactory(null);
-        jFormattedTextField8.setFormatterFactory(null);
-        jFormattedTextField4.setFormatterFactory(null);*/
-        //instance table model
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -112,6 +108,11 @@ public class AeroportosUI extends javax.swing.JDialog
         jPanel2.add(jFormattedTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 320, 30));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/magnifier.png"))); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, 40));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete.png"))); // NOI18N
@@ -158,9 +159,9 @@ public class AeroportosUI extends javax.swing.JDialog
         jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/accept.png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
             }
         });
         jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, 40));
@@ -279,7 +280,7 @@ public class AeroportosUI extends javax.swing.JDialog
         return;
     }//GEN-LAST:event_jButton2MouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         if(jFormattedTextField12.getText().equals("") || jFormattedTextField13.getText().equals("") || jFormattedTextField8.getText().equals("") || jComboBox4.getSelectedItem().toString().equals("")|| jFormattedTextField10.getText().equals(""))
         {
             return;
@@ -291,9 +292,48 @@ public class AeroportosUI extends javax.swing.JDialog
         } 
         catch(Exception ex)
         {
+            
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        try
+        {
+            for(int i = 0; i < lista.getQtd(); i++)
+            {
+                if(!jFormattedTextField3.getText().equals("") && !jFormattedTextField11.getText().equals(""))
+                {
+                    if(lista.getPos(i).getCodigoIATA().equals(jFormattedTextField11.getText()))
+                    {
+                        Aeroporto ae = lista.getPos(i);
+                    
+                    }
+                }
+                else
+                    if(jFormattedTextField3.getText().equals(""))
+                    {
+                        if(lista.getPos(i).getCodigoICAO().equals(jFormattedTextField11.getText()))
+                        {
+                            Aeroporto ae = lista.getPos(i);
+
+                        }
+                    } 
+                    else
+                    {
+                        if(lista.getPos(i).getCodigoIATA().equals(jFormattedTextField3.getText()))
+                        {
+                            Aeroporto ae = lista.getPos(i);
+
+                        }
+                    }
+            }
+        }
+        catch(Exception ex)
+        {
+        
         }
         
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton1MouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
