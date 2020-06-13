@@ -258,6 +258,23 @@ public class ListaDuplamenteLigadaDesordenada <X>
             
         return ret;
     }
+    
+    public X getPos (int pos) throws Exception
+    {
+        if (this.primeiro==null/*&&this.fim==null)*/)
+            throw new Exception ("Nada a obter");
+
+        No  atual=this.primeiro;
+        int ret  = 0;
+
+        while (atual!=null && ret <= pos)
+        {
+            ret++;                
+            atual = atual.getProx();
+        }
+        
+        return atual.getInfo();
+    }
 
     public X getDoFim () throws Exception
     {
