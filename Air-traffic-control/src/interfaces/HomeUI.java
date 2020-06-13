@@ -3,7 +3,6 @@ package interfaces;
 import classes.ListaDuplamenteLigadaDesordenada;
 import classes.Aeroporto;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 public class HomeUI extends javax.swing.JFrame 
 {
