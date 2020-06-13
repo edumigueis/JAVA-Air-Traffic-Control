@@ -156,8 +156,8 @@ public class Voo implements Cloneable
         ret = ret *5 + this.aeroDestino.hashCode();
         ret = ret * 5 + this.aeroOrigem.hashCode();
         ret = ret * 5 + this.companhiaOperadora.hashCode();
-        ret = ret * 5 + new Integer(this.numeroVoo).haschCode();
-        ret = ret * 5 + new Integer(this.idVoo).haschCode();
+        ret = ret * 5 + new Integer(this.numeroVoo).hashCode();
+        ret = ret * 5 + new Integer(this.idVoo).hashCode();
         if(ret<0)
             ret = -ret;
 
@@ -198,7 +198,7 @@ public class Voo implements Cloneable
      * Atribui os valores do modelo a essa classe
      * @param modelo
      */
-    public Voo(Voo modelo){
+    public Voo(Voo modelo) throws Exception{
         if(modelo == null){
             throw new Exception("modelo para cópia não pode ser nulo");
         }

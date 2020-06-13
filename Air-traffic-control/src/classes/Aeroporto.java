@@ -178,7 +178,7 @@ public class Aeroporto implements Cloneable
         ret = ret *5 + this.cidade.hashCode();
         ret = ret * 5 + this.codigoIATA.hashCode();
         ret = ret * 5 + this.codigoICAO.hashCode();
-        ret = ret * 5 + new Integer(this.idAeroporto).haschCode();
+        ret = ret * 5 + new Integer(this.idAeroporto).hashCode();
         ret = ret * 5 + this.nomeAero.hashCode();
         ret = ret * 5 + this.pais.hashCode();
         if(ret<0)
@@ -193,7 +193,7 @@ public class Aeroporto implements Cloneable
     public Object clone(){
         Aeroporto clone = null;
         try{
-            Aeroporto = new Aeroporto(this);
+            clone = new Aeroporto(this);
         }
         catch(Exception e){}
         return clone;
@@ -221,7 +221,8 @@ public class Aeroporto implements Cloneable
      * Atribui os valores do modelo a essa classe
      * @param modelo
      */
-    public Aeroporto(Aeroporto modelo){
+    public Aeroporto(Aeroporto modelo) throws Exception
+    {
         if(modelo == null){
             throw new Exception("modelo para cópia não pode ser nulo");
         }
@@ -232,6 +233,5 @@ public class Aeroporto implements Cloneable
         this.nomeAero = modelo.nomeAero;
         this.pais = modelo.pais;
     }
-
     
 }
