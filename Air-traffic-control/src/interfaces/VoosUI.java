@@ -1,6 +1,6 @@
 package interfaces;
 
-import classes.Aeroporto;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -18,7 +18,6 @@ public class VoosUI extends javax.swing.JDialog
         this.setIconImage(new ImageIcon(getClass().getResource("/imagens/arrow_branch.png")).getImage());
         jTable2.getTableHeader().setResizingAllowed(false);
         jTable2.getTableHeader().setReorderingAllowed(false);
-        parent.getListaAeroportos().invertaSe();
         
         int tamanho = parent.getListaAeroportos().toArrayList().size();
         String dados[] = new String[tamanho];
