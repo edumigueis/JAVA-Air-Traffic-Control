@@ -20,6 +20,20 @@ public class AeroportosUI extends javax.swing.JDialog
         jTable2.getTableHeader().setResizingAllowed(false);
         jTable2.getTableHeader().setReorderingAllowed(false); 
         jComboBox4.setModel(new DefaultComboBoxModel(Paises.PAISES));
+        lista = parent.getListaAeroportos();
+        Aeroporto aero = new Aeroporto("GRU","HUY","Aeroporto de Beverly Hills", "Brasil", "São Paulo");
+        Aeroporto aero2 = new Aeroporto("GRU","HUY","Aeroporto de Beverly Hills", "Brasil", "São Paulo");
+        Aeroporto aero3 = new Aeroporto("GRU","HUY","Aeroporto de Beverly Hills", "Brasil", "São Paulo");
+        
+        
+        try{
+        lista.insiraNoFim(aero);
+        lista.insiraNoFim(aero2);
+        lista.insiraNoFim(aero3);
+        }
+        catch(Exception ex){
+        }
+        
     }
 
     @SuppressWarnings("unchecked")
