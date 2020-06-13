@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package classes;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,21 +8,20 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Voo implements Cloneable
 {
-
     private int idVoo;
     static AtomicInteger nextId = new AtomicInteger();
     private int numeroVoo = 0;
     private String aeroOrigem = "";
     private String aeroDestino = "";
     private String companhiaOperadora = "";
+    
     /**
      * Construtor da classe voo
-     * @param numeroVoo
-     * @param companhiaOperadora
-     * @param aeroOrigem
-     * @param aeroDestino
+     * @param numeroVoo número do voo
+     * @param companhiaOperadora companhia aérea
+     * @param aeroOrigem aeroporto de origem
+     * @param aeroDestino aeroporto de destino
      */
-
     public Voo(int numeroVoo, String companhiaOperadora, String aeroOrigem, String aeroDestino) 
     {
         this.numeroVoo = numeroVoo;
@@ -36,48 +30,48 @@ public class Voo implements Cloneable
         this.companhiaOperadora = companhiaOperadora;
         this.idVoo = nextId.incrementAndGet();
     }
+    
     /**
      * pega o numero do voo
      * @return numeroVoo
     */
-
     public int getNumeroVoo() 
     {
         return this.numeroVoo;
     }
+    
     /**
      * pega a companhia Operadora
      * @return companhiaOperadora
      */
-
     public String getCompanhiaOperadora() 
     {
         return this.companhiaOperadora;
     }
+    
     /**
      * pega o aeroporto de origem
      * @return aeroOrigem
      */
-
     public String getAeroOrigem() 
     {
         return this.aeroOrigem;
     }
+    
     /**
      * pega o aeroporto de destino
      * @return aeroDestino 
      */
-
     public String getAeroDestino() 
     {
         return this.aeroDestino;
     }
+    
     /**
      * da o valor do parametro a companhia operadora
      * @param comp
      * @throws Exception nome passado é inválido
      */
-
     public void setCompanhiaOperadora(String comp) throws Exception 
     {
         if (comp.equals(""))
@@ -89,6 +83,7 @@ public class Voo implements Cloneable
             this.companhiaOperadora = comp;
         }
     }
+    
     /**
      * da o valor do parametro ao nome do aeroporto
      * @param aerOr
@@ -105,12 +100,12 @@ public class Voo implements Cloneable
             this.aeroOrigem = aerOr;
         }
     }
+    
     /**
      * da o valor do parametro ao aeroporto de destino
      * @param aerDes
      * @throws Exception nome passado é inválido
      */
-
     public void setAeroDestino(String aerDes) throws Exception 
     {
         if (aerDes.equals("")) 
@@ -143,45 +138,56 @@ public class Voo implements Cloneable
      * Constrói uma string que representa a classe
      * @return uma string com os atributos
      */
+    @Override
     public String toString(){
         return "Número do voo: " + numeroVoo + " " + ", aeroporto de origem " + aeroOrigem + ", aeroporto de destino:  " + aeroDestino +
         ", companhia operadora: " + companhiaOperadora + ", idVoo: " + idVoo ;
     }
+    
     /**
      * Constrói o haschCode da classe
      * @return haschCode da classe
      */
-    public int haschCode(){
+    @Override
+    public int hashCode()
+    {
         int ret = 111;
         ret = ret *5 + this.aeroDestino.hashCode();
         ret = ret * 5 + this.aeroOrigem.hashCode();
         ret = ret * 5 + this.companhiaOperadora.hashCode();
-        ret = ret * 5 + new Integer(this.numeroVoo).haschCode();
-        ret = ret * 5 + new Integer(this.idVoo).haschCode();
+        ret = ret * 5 + new Integer(this.numeroVoo).hashCode();
+        ret = ret * 5 + new Integer(this.idVoo).hashCode();
         if(ret<0)
             ret = -ret;
 
         return ret;
     }
+    
     /**
      * Clona a classe
      * @return o clone
      */
-    public Object clone(){
+    @Override
+    public Object clone()
+    {
         Voo clone = null;
-        try{
+        try
+        {
             clone = new Voo(this);
         }
-        catch(Exception e){}
+        catch(Exception e)
+        {}      
         return clone;
-
     }
+    
     /**
      * Compara se a classe passada é igual a essa
      * @param obj
      * @return
      */
-    public boolean equals(Object obj){
+    @Override
+    public boolean equals(Object obj)
+    {
         if(obj == null)
             return false;
         if(obj == this)
@@ -194,18 +200,21 @@ public class Voo implements Cloneable
             return false;
         return true;
     }
+    
     /**
      * Atribui os valores do modelo a essa classe
      * @param modelo
+     * @throws Exception é lançada uma exceção se o parâmetro for nulo
      */
-    public Voo(Voo modelo){
+    public Voo(Voo modelo) throws Exception
+    {
         if(modelo == null){
             throw new Exception("modelo para cópia não pode ser nulo");
         }
         this.aeroDestino = modelo.aeroDestino;
         this.companhiaOperadora = modelo.companhiaOperadora;
         this.idVoo = modelo.idVoo;
-        this.nomeAero = modelo.nomeAero;
+        this.numeroVoo = modelo.numeroVoo;
         this.aeroOrigem = modelo.aeroOrigem;
     }
 

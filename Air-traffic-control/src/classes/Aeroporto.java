@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package classes;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -23,13 +18,12 @@ public class Aeroporto implements Cloneable
     private final ListaDuplamenteLigadaDesordenada<Voo> listaVoos;
 
     /**
-     * Construtor da classe Aeroporto
-     * 
-     * @param codigoIATA
-     * @param codigoICAO
-     * @param nome
-     * @param pais
-     * @param cidade
+     * Construtor da classe Aeroporto 
+     * @param codigoIATA código IATA do aeroporto
+     * @param codigoICAO código ICAO do aeroporto
+     * @param nome nome do aeroporto
+     * @param pais país onde se localiza o aeroporto
+     * @param cidade cidade onde se localiza o aeroporto
      */
     public Aeroporto(String codigoIATA, String codigoICAO, String nome, String pais, String cidade)
     {
@@ -38,18 +32,19 @@ public class Aeroporto implements Cloneable
         this.nomeAero = nome;
         this.pais = pais;
         this.cidade = cidade;
-        this.listaVoos = new ListaDuplamenteLigadaDesordenada<Voo>();
+        this.listaVoos = new ListaDuplamenteLigadaDesordenada<>();
         this.idAeroporto = nextId.incrementAndGet();
     }
+    
     /**
      * Pega o codigoIATA
      * @return codigoIATA
-     */
-    
+     */    
     public String getCodigoIATA()
     {
         return this.codigoIATA;
     }
+    
     /**
      * Pega o codigoICAO
      * @return codigoICAO
@@ -58,6 +53,7 @@ public class Aeroporto implements Cloneable
     {
         return this.codigoICAO;
     }
+    
     /**
      * Pega o nome do aeroporto
      * @return nomeAero
@@ -66,6 +62,7 @@ public class Aeroporto implements Cloneable
     {
         return this.nomeAero;
     }
+    
     /**
      * Pega o país
      * @return pais
@@ -74,6 +71,7 @@ public class Aeroporto implements Cloneable
     {
         return this.pais;
     }
+    
     /**
      * Pega a cidade
      * @return cidade
@@ -82,6 +80,7 @@ public class Aeroporto implements Cloneable
     {
         return this.cidade;
     }
+    
     /**
      * Pega os voos da lista
      * @return
@@ -90,6 +89,7 @@ public class Aeroporto implements Cloneable
     {
         return this.listaVoos;
     }
+    
     /**
      * Dá o valor do parametro ao Código IATA
      * @param codigo
@@ -102,8 +102,9 @@ public class Aeroporto implements Cloneable
             throw new Exception("Código IATA inválido.");
         }
         else
-        this.codigoIATA = codigo;
+            this.codigoIATA = codigo;
     }
+    
     /**
      * Dá o valor do parametro ao Código ICAO
      * @param codigo
@@ -116,8 +117,9 @@ public class Aeroporto implements Cloneable
             throw new Exception("Código ICAO inválido.");
         }
         else
-        this.codigoICAO = codigo;
+            this.codigoICAO = codigo;
     }
+    
     /**
      * Dá o valor do parametro ao nome
      * @param nome
@@ -130,8 +132,9 @@ public class Aeroporto implements Cloneable
             throw new Exception("Nome inválido.");
         }
         else
-        this.nomeAero = nome;
+            this.nomeAero = nome;
     }
+    
     /**
      * Dá o valor do parametro ao pais
      * @param pais
@@ -144,8 +147,9 @@ public class Aeroporto implements Cloneable
             throw new Exception("País inválido.");
         }
         else
-        this.pais = pais;
+            this.pais = pais;
     }
+    
     /**
      * Dá o valor do parametro a cidade
      * @param cidade
@@ -160,25 +164,29 @@ public class Aeroporto implements Cloneable
         else
         this.cidade = cidade;
     }
+    
      /**
      * Constrói uma string que representa a classe
      * @return uma string com os atributos
      */
+    @Override
     public String toString(){
         return "IdAeroporto: " + this.idAeroporto + "" + " codigo IATA: " + codigoIATA + " codigo ICAO " + codigoICAO +
         " nome areporto " + nomeAero + " pais: " + pais + " cidade " + cidade;
 
     }
+    
     /**
      * Constrói o haschCode da classe
      * @return haschCode da classe
      */
-    public int haschCode(){
+    @Override
+    public int hashCode(){
         int ret = 111;
         ret = ret *5 + this.cidade.hashCode();
         ret = ret * 5 + this.codigoIATA.hashCode();
         ret = ret * 5 + this.codigoICAO.hashCode();
-        ret = ret * 5 + new Integer(this.idAeroporto).haschCode();
+        ret = ret * 5 + new Integer(this.idAeroporto).hashCode();
         ret = ret * 5 + this.nomeAero.hashCode();
         ret = ret * 5 + this.pais.hashCode();
         if(ret<0)
@@ -186,24 +194,31 @@ public class Aeroporto implements Cloneable
 
         return ret;
     }
+    
      /**
      * Clona a classe
      * @return o clone
      */
-    public Object clone(){
+    @Override
+    public Object clone()
+    {
         Aeroporto clone = null;
-        try{
-            Aeroporto = new Aeroporto(this);
+        try
+        {
+            clone = new Aeroporto(this);
         }
-        catch(Exception e){}
+        catch(Exception e)
+        {}
+        
         return clone;
-
     }
+    
     /**
      * Compara se a classe passada é igual a essa
      * @param obj
      * @return
      */
+    @Override
     public boolean equals(Object obj){
         if(obj == null)
             return false;
@@ -220,9 +235,12 @@ public class Aeroporto implements Cloneable
      /**
      * Atribui os valores do modelo a essa classe
      * @param modelo
+     * @throws Exception é lançada uma exceção se o parâmetro for nulo
      */
-    public Aeroporto(Aeroporto modelo){
-        if(modelo == null){
+    public Aeroporto(Aeroporto modelo) throws Exception
+    {
+        if(modelo == null)
+        {
             throw new Exception("modelo para cópia não pode ser nulo");
         }
         this.cidade = modelo.cidade;
@@ -231,7 +249,6 @@ public class Aeroporto implements Cloneable
         this.idAeroporto = modelo.idAeroporto;
         this.nomeAero = modelo.nomeAero;
         this.pais = modelo.pais;
-    }
-
-    
+        this.listaVoos = modelo.listaVoos;
+    }  
 }
