@@ -28,6 +28,7 @@ public class VoosUI extends javax.swing.JDialog
         }
           
         jComboBox3.setModel(new DefaultComboBoxModel(dados));
+        jComboBox4.setModel(new DefaultComboBoxModel(dados));
     }
 
     @SuppressWarnings("unchecked")
