@@ -22,6 +22,11 @@ public class AeroportosUI extends javax.swing.JDialog
         jTable2.getTableHeader().setReorderingAllowed(false);
         jComboBox4.setModel(new DefaultComboBoxModel(Paises.PAISES));
         lista = parent.getListaAeroportos();
+        try{
+            lista.insiraNoFim(new Aeroporto("CDG","UIYA","Aeroporto Charles", "França", "Paris"));
+        }
+        catch(Exception ex){}
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -325,7 +330,7 @@ public class AeroportosUI extends javax.swing.JDialog
                     } 
                     else
                     {
-                        if(lista.getPos(i).getCodigoIATA().equals(jFormattedTextField3.getText()))
+                        if(lista.getPos(i).getCodigoIATA().equals(jFormattedTextField3.getText().toUpperCase()))
                         {
                             jFormattedTextField3.setText(lista.getPos(i).getCodigoICAO());
                             jFormattedTextField4.setText(lista.getPos(i).getNome());
@@ -335,7 +340,7 @@ public class AeroportosUI extends javax.swing.JDialog
                     }
             }
             
-            limparTelaConsulta();
+            
         }
         catch(Exception ex)
         {}       
