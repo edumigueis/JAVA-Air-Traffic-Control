@@ -279,6 +279,25 @@ public class VoosUI extends javax.swing.JDialog
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         if (!isClickeable)
             return;
+        
+        try
+        {
+            Voo vooCad = new Voo(Integer.parseInt(jFormattedTextField9.getText()), jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(), jFormattedTextField10.getText());
+            
+            for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
+            {   
+                    if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jComboBox3.getSelectedItem().toString().toUpperCase()))
+                    {
+                        parent.getListaAeroportos().getPos(i).addVoo(vooCad);
+                        JOptionPane.showMessageDialog(null, "Todos os dados devem ser preenchidos", " Cadastro de Voo Concluído", JOptionPane.INFORMATION_MESSAGE);
+                    }
+            }
+        } 
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Todos os dados devem ser preenchidos", " Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
