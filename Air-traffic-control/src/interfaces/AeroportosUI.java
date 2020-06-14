@@ -318,13 +318,14 @@ public class AeroportosUI extends javax.swing.JDialog
                 limparTelaConsulta();
                 isClickeable = false;
                 jButton2.setEnabled(false);
-            } 
-            else 
-                return;         
+            }       
         }
         catch (Exception e)
         {
-            System.out.print(e);
+            JOptionPane.showMessageDialog(null, "O código deve ser preenchido", " Erro", JOptionPane.ERROR_MESSAGE);
+            limparTelaConsulta();
+            isClickeable = false;
+            jButton2.setEnabled(false);
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
@@ -472,11 +473,11 @@ public class AeroportosUI extends javax.swing.JDialog
         centralizado.setHorizontalAlignment(SwingConstants.CENTER);
         direita.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        jTable2.getColumnModel().getColumn(0).setCellRenderer(direita);
+        jTable2.getColumnModel().getColumn(0).setCellRenderer(esquerda);
         jTable2.getColumnModel().getColumn(1).setCellRenderer(esquerda);
         jTable2.getColumnModel().getColumn(2).setCellRenderer(esquerda);
         jTable2.getColumnModel().getColumn(3).setCellRenderer(esquerda);
-        jTable2.getColumnModel().getColumn(4).setCellRenderer(centralizado);
+        jTable2.getColumnModel().getColumn(4).setCellRenderer(esquerda);
     }
     
     private void limparTelaCadastro()
