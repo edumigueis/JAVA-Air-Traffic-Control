@@ -25,6 +25,10 @@ public class AeroportosUI extends javax.swing.JDialog
         jTable2.getTableHeader().setReorderingAllowed(false);
         jComboBox4.setModel(new DefaultComboBoxModel(Paises.PAISES));
         parent.getListaAeroportos();
+        try{
+            parent.getListaAeroportos().insiraNoFim(new Aeroporto("CDG","UIYA","Aeroporto Charles", "França", "Paris"));
+        }
+        catch(Exception ex){}
     }
 
     @SuppressWarnings("unchecked")
@@ -378,7 +382,7 @@ public class AeroportosUI extends javax.swing.JDialog
                     {
                         if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jFormattedTextField3.getText()))
                         {
-                            jFormattedTextField3.setText(parent.getListaAeroportos().getPos(i).getCodigoICAO());
+                            jFormattedTextField11.setText(parent.getListaAeroportos().getPos(i).getCodigoICAO());
                             jFormattedTextField4.setText(parent.getListaAeroportos().getPos(i).getNome());
                             jFormattedTextField5.setText(parent.getListaAeroportos().getPos(i).getPais());
                             jFormattedTextField6.setText(parent.getListaAeroportos().getPos(i).getCidade());
