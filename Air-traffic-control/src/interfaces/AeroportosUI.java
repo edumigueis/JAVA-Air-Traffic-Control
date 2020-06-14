@@ -24,11 +24,6 @@ public class AeroportosUI extends javax.swing.JDialog
         jTable2.getTableHeader().setResizingAllowed(false);
         jTable2.getTableHeader().setReorderingAllowed(false);
         jComboBox4.setModel(new DefaultComboBoxModel(Paises.PAISES));
-        parent.getListaAeroportos();
-        try{
-            parent.getListaAeroportos().insiraNoFim(new Aeroporto("CDG","UIYA","Aeroporto Charles", "França", "Paris"));
-        }
-        catch(Exception ex){}
     }
 
     @SuppressWarnings("unchecked")
@@ -357,7 +352,7 @@ public class AeroportosUI extends javax.swing.JDialog
             
             for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
             {
-                existe = true;
+
                 if(!jFormattedTextField3.getText().equals("") && !jFormattedTextField11.getText().equals(""))
                 {
                     if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jFormattedTextField3.getText().toUpperCase()))
@@ -365,6 +360,7 @@ public class AeroportosUI extends javax.swing.JDialog
                         jFormattedTextField4.setText(parent.getListaAeroportos().getPos(i).getNome());
                         jFormattedTextField5.setText(parent.getListaAeroportos().getPos(i).getPais());
                         jFormattedTextField6.setText(parent.getListaAeroportos().getPos(i).getCidade());
+                        existe = true;
                     }
                 }
                 else
@@ -376,22 +372,27 @@ public class AeroportosUI extends javax.swing.JDialog
                             jFormattedTextField4.setText(parent.getListaAeroportos().getPos(i).getNome());
                             jFormattedTextField5.setText(parent.getListaAeroportos().getPos(i).getPais());
                             jFormattedTextField6.setText(parent.getListaAeroportos().getPos(i).getCidade());
+                            existe = true;
                         }
                     } 
                     else
                     {
-                        if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jFormattedTextField3.getText()))
+                        if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jFormattedTextField3.getText().toUpperCase()))
                         {
                             jFormattedTextField11.setText(parent.getListaAeroportos().getPos(i).getCodigoICAO());
                             jFormattedTextField4.setText(parent.getListaAeroportos().getPos(i).getNome());
                             jFormattedTextField5.setText(parent.getListaAeroportos().getPos(i).getPais());
                             jFormattedTextField6.setText(parent.getListaAeroportos().getPos(i).getCidade());
+                            existe = true;
                         }
                     }
             }  
             
             if(!existe)
+            {
                 JOptionPane.showMessageDialog(null, "Aeroporto não encontrado", " Erro", JOptionPane.ERROR_MESSAGE);
+                limparTelaConsulta();
+            }
             else
             {
                 isClickeable = true;
@@ -402,18 +403,19 @@ public class AeroportosUI extends javax.swing.JDialog
         {}       
     }//GEN-LAST:event_jButton1MouseClicked
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AeroportosUI dialog = new AeroportosUI(new HomeUI(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+    public static void main(String args[]) 
+    {
+        java.awt.EventQueue.invokeLater(() -> {
+            AeroportosUI dialog = new AeroportosUI(new HomeUI(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() 
+            {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) 
+                {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 
