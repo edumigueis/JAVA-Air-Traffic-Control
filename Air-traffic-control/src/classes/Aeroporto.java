@@ -165,6 +165,16 @@ public class Aeroporto implements Cloneable
         this.cidade = cidade;
     }
     
+    public void addVoo(Voo voo) throws Exception
+    {
+        if(voo == null)
+        {
+            throw new Exception("Voo inválido.");
+        }
+        else
+        this.listaVoos.insiraNoFim(voo);
+    }
+    
      /**
      * Constrói uma string que representa a classe
      * @return uma string com os atributos

@@ -22,8 +22,11 @@ public class Voo implements Cloneable
      * @param aeroOrigem aeroporto de origem
      * @param aeroDestino aeroporto de destino
      */
-    public Voo(int numeroVoo, String companhiaOperadora, String aeroOrigem, String aeroDestino) 
+    public Voo(int numeroVoo, String aeroOrigem, String aeroDestino, String companhiaOperadora) throws Exception 
     {
+        if(numeroVoo < 0 || aeroOrigem.equals("") || aeroDestino.equals("") || companhiaOperadora.equals(""))
+            throw new Exception("Dados ausentes");
+                    
         this.numeroVoo = numeroVoo;
         this.aeroOrigem = aeroOrigem;
         this.aeroDestino = aeroDestino;
