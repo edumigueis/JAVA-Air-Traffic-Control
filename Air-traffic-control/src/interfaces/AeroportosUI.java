@@ -7,21 +7,24 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class AeroportosUI extends javax.swing.JDialog 
 {
     boolean isClickeable = false;
-    ListaDuplamenteLigadaDesordenada<Aeroporto> lista = new ListaDuplamenteLigadaDesordenada<Aeroporto>();
+    HomeUI parent;
     
     public AeroportosUI(HomeUI parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         initComponents();
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagens/map.png")).getImage());
         jTable2.getTableHeader().setResizingAllowed(false);
         jTable2.getTableHeader().setReorderingAllowed(false);
         jComboBox4.setModel(new DefaultComboBoxModel(Paises.PAISES));
-        lista = parent.getListaAeroportos();
+        parent.getListaAeroportos();
     }
 
     @SuppressWarnings("unchecked")
@@ -60,7 +63,6 @@ public class AeroportosUI extends javax.swing.JDialog
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
-        jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -220,13 +222,9 @@ public class AeroportosUI extends javax.swing.JDialog
         jPanel5.setMinimumSize(new java.awt.Dimension(12, 11));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-        jLabel27.setText("País com mais aeroportos cadastrados:");
-        jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -2, -1, 20));
-
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         jLabel28.setText("Total de aeroportos:");
-        jPanel5.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, -2, -1, 20));
+        jPanel5.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, -2, -1, 20));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 490, 20));
 
@@ -243,10 +241,7 @@ public class AeroportosUI extends javax.swing.JDialog
 
     private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1ComponentShown
         try
-        {           
-            jLabel28.setText("Total de aeroportos: " + 90);
-            jLabel27.setText("País com mais aeroportos cadastrados: " + "República Dominicana");
-            
+        {                     
             DefaultTableModel model = new DefaultTableModel()
             {
                 @Override
@@ -262,11 +257,20 @@ public class AeroportosUI extends javax.swing.JDialog
             model.addColumn("País");
             model.addColumn("Cidade");
             
-            model.addRow(new Object[]{"ee",
-                                      "ee",
-                                      "ee",
-                                      "ee",
-                                      "ee"});
+            ArrayList<String> paises = new ArrayList<String>();
+            
+            for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
+            {
+                model.addRow(new Object[]{parent.getListaAeroportos().getPos(i).getCodigoIATA(),
+                                          parent.getListaAeroportos().getPos(i).getCodigoICAO(),
+                                          parent.getListaAeroportos().getPos(i).getNome(),
+                                          parent.getListaAeroportos().getPos(i).getPais(),
+                                          parent.getListaAeroportos().getPos(i).getCidade()});
+                
+                paises.add(parent.getListaAeroportos().getPos(i).getPais());            
+            }
+            
+            jLabel28.setText("Total de aeroportos: " + parent.getListaAeroportos().getQtd());
             
             jTable2.setModel(model);
             formatarColunasDaTabela(); 
@@ -277,7 +281,52 @@ public class AeroportosUI extends javax.swing.JDialog
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         if (!isClickeable)
-        return;
+            return;     
+        
+        try
+        {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja excluir? Não é possível desfazer esta ação.", " Aviso", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) 
+            {
+                Aeroporto remover = null;
+                
+                for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
+                {
+                    if(!jFormattedTextField3.getText().equals("") && !jFormattedTextField11.getText().equals(""))
+                    {
+                        if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jFormattedTextField3.getText().toUpperCase()))
+                        {
+                            remover = parent.getListaAeroportos().getPos(i);
+                        }
+                    }
+                    else
+                        if(jFormattedTextField3.getText().equals(""))
+                        {
+                            if(parent.getListaAeroportos().getPos(i).getCodigoICAO().toUpperCase().equals(jFormattedTextField11.getText().toUpperCase()))
+                            {
+                                remover = parent.getListaAeroportos().getPos(i);
+                            }
+                        } 
+                        else
+                        {
+                            if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jFormattedTextField3.getText()))
+                            {
+                                remover = parent.getListaAeroportos().getPos(i);
+                            }
+                        }
+                }
+
+                parent.getListaAeroportos().remova(remover);
+                limparTelaConsulta();
+                isClickeable = false;
+                jButton2.setEnabled(false);
+            } 
+            else 
+                return;         
+        }
+        catch (Exception e)
+        {
+            System.out.print(e);
+        }
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
@@ -289,7 +338,8 @@ public class AeroportosUI extends javax.swing.JDialog
         try
         {
             Aeroporto aeroporto = new Aeroporto(jFormattedTextField12.getText(),jFormattedTextField13.getText(), jFormattedTextField8.getText(),jComboBox4.getSelectedItem().toString(), jFormattedTextField10.getText());
-            this.lista.insiraNoFim(aeroporto);
+            this.parent.getListaAeroportos().insiraNoFim(aeroporto);
+            JOptionPane.showMessageDialog(null, "Aeroporto cadastrado com sucesso!", " Sucesso", JOptionPane.INFORMATION_MESSAGE);
             limparTelaCadastro();
         } 
         catch(Exception ex)
@@ -299,43 +349,50 @@ public class AeroportosUI extends javax.swing.JDialog
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try
         {
-            for(int i = 0; i < lista.getQtd(); i++)
+            boolean existe = false;
+            
+            for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
             {
+                existe = true;
                 if(!jFormattedTextField3.getText().equals("") && !jFormattedTextField11.getText().equals(""))
                 {
-                    if(lista.getPos(i).getCodigoIATA().equals(jFormattedTextField3.getText().toUpperCase()))
+                    if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jFormattedTextField3.getText().toUpperCase()))
                     {
-                        jFormattedTextField4.setText(lista.getPos(i).getNome());
-                        jFormattedTextField5.setText(lista.getPos(i).getPais());
-                        jFormattedTextField6.setText(lista.getPos(i).getCidade());
+                        jFormattedTextField4.setText(parent.getListaAeroportos().getPos(i).getNome());
+                        jFormattedTextField5.setText(parent.getListaAeroportos().getPos(i).getPais());
+                        jFormattedTextField6.setText(parent.getListaAeroportos().getPos(i).getCidade());
                     }
                 }
                 else
                     if(jFormattedTextField3.getText().equals(""))
                     {
-                        String cu1 = lista.getPos(i).getCodigoICAO();
-                        String cu = jFormattedTextField11.getText().toUpperCase();
-                        if(lista.getPos(i).getCodigoICAO().equals(jFormattedTextField11.getText().toUpperCase()))
+                        if(parent.getListaAeroportos().getPos(i).getCodigoICAO().toUpperCase().equals(jFormattedTextField11.getText().toUpperCase()))
                         {
-                            jFormattedTextField3.setText(lista.getPos(i).getCodigoIATA());
-                            jFormattedTextField4.setText(lista.getPos(i).getNome());
-                            jFormattedTextField5.setText(lista.getPos(i).getPais());
-                            jFormattedTextField6.setText(lista.getPos(i).getCidade());
+                            jFormattedTextField3.setText(parent.getListaAeroportos().getPos(i).getCodigoIATA());
+                            jFormattedTextField4.setText(parent.getListaAeroportos().getPos(i).getNome());
+                            jFormattedTextField5.setText(parent.getListaAeroportos().getPos(i).getPais());
+                            jFormattedTextField6.setText(parent.getListaAeroportos().getPos(i).getCidade());
                         }
                     } 
                     else
                     {
-                        if(lista.getPos(i).getCodigoIATA().equals(jFormattedTextField3.getText()))
+                        if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jFormattedTextField3.getText()))
                         {
-                            jFormattedTextField3.setText(lista.getPos(i).getCodigoICAO());
-                            jFormattedTextField4.setText(lista.getPos(i).getNome());
-                            jFormattedTextField5.setText(lista.getPos(i).getPais());
-                            jFormattedTextField6.setText(lista.getPos(i).getCidade());
+                            jFormattedTextField3.setText(parent.getListaAeroportos().getPos(i).getCodigoICAO());
+                            jFormattedTextField4.setText(parent.getListaAeroportos().getPos(i).getNome());
+                            jFormattedTextField5.setText(parent.getListaAeroportos().getPos(i).getPais());
+                            jFormattedTextField6.setText(parent.getListaAeroportos().getPos(i).getCidade());
                         }
                     }
-            }
+            }  
             
-            limparTelaConsulta();
+            if(!existe)
+                JOptionPane.showMessageDialog(null, "Aeroporto não encontrado", " Erro", JOptionPane.ERROR_MESSAGE);
+            else
+            {
+                isClickeable = true;
+                jButton2.setEnabled(true);
+            }
         }
         catch(Exception ex)
         {}       
@@ -376,7 +433,6 @@ public class AeroportosUI extends javax.swing.JDialog
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
