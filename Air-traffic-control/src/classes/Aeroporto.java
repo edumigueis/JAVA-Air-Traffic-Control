@@ -190,8 +190,8 @@ public class Aeroporto implements Cloneable
     }
     
     /**
-     * Constrói o haschCode da classe
-     * @return haschCode da classe
+     * Constrói o hashCode da classe
+     * @return hashCode da classe
      */
     @Override
     public int hashCode(){
