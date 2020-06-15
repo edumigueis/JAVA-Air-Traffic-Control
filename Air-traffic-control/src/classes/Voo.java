@@ -151,7 +151,7 @@ public class Voo implements Cloneable
      * Constrói o haschCode da classe
      * @return haschCode da classe
      */
-    public int haschCode(){
+    public int hashCode(){
         int ret = 111;
         ret = ret *5 + this.aeroDestino.hashCode();
         ret = ret * 5 + this.aeroOrigem.hashCode();
