@@ -1,5 +1,7 @@
 package interfaces;
 
+import classes.*;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -7,20 +9,30 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class VoosUI extends javax.swing.JDialog 
-{
+{   
     boolean isClickeable = false;
+    HomeUI parent;
+    Aeroporto aero;
     
-    public VoosUI(java.awt.Frame parent, boolean modal) {
+    public VoosUI(HomeUI parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.parent = parent;
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagens/arrow_branch.png")).getImage());
         jTable2.getTableHeader().setResizingAllowed(false);
         jTable2.getTableHeader().setReorderingAllowed(false);
-        /*jFormattedTextField2.setFormatterFactory(null);
-        jFormattedTextField5.setFormatterFactory(null);
-        jFormattedTextField8.setFormatterFactory(null);
-        jFormattedTextField4.setFormatterFactory(null);*/
+        
+        int tamanho = parent.getListaAeroportos().toArrayList().size();
+        String dados[] = new String[tamanho];
+        
+        for(int i = 0; i < tamanho; i++)
+        {
+            dados[i] = parent.getListaAeroportos().toArrayList().get(i).getCodigoIATA();
+        }
+          
+        jComboBox3.setModel(new DefaultComboBoxModel(dados));
+        jComboBox4.setModel(new DefaultComboBoxModel(dados));
     }
 
     @SuppressWarnings("unchecked")
@@ -40,6 +52,8 @@ public class VoosUI extends javax.swing.JDialog
         jFormattedTextField12 = new javax.swing.JFormattedTextField();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jFormattedTextField6 = new javax.swing.JFormattedTextField();
+        jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jFormattedTextField9 = new javax.swing.JFormattedTextField();
@@ -55,7 +69,6 @@ public class VoosUI extends javax.swing.JDialog
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
-        jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -68,16 +81,11 @@ public class VoosUI extends javax.swing.JDialog
 
         jPanel2.setBackground(new java.awt.Color(219, 219, 225));
         jPanel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jPanel2ComponentShown(evt);
-            }
-        });
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Número do voo:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        jLabel2.setText("Código Aeroporto (IATA):");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 8, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Aeroporto de destino:");
@@ -94,7 +102,7 @@ public class VoosUI extends javax.swing.JDialog
         jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
 
         jFormattedTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel2.add(jFormattedTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 130, 40));
+        jPanel2.add(jFormattedTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 160, 40));
 
         jFormattedTextField8.setEditable(false);
         jFormattedTextField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -115,10 +123,22 @@ public class VoosUI extends javax.swing.JDialog
                 jButton2MouseClicked(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, 40));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, 40));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/magnifier.png"))); // NOI18N
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, 40));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, 40));
+
+        jFormattedTextField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel2.add(jFormattedTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 100, 40));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Número do voo:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 8, -1, -1));
 
         jTabbedPane1.addTab("Consultar / Excluir  ", new javax.swing.ImageIcon(getClass().getResource("/imagens/magnifier.png")), jPanel2); // NOI18N
 
@@ -135,26 +155,31 @@ public class VoosUI extends javax.swing.JDialog
         jPanel4.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 80, 610, 20));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setText("Aeroporto de origem:");
+        jLabel11.setText("Aeroporto de origem (IATA):");
         jLabel11.setToolTipText("");
         jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
-        jPanel4.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 220, 30));
+        jPanel4.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 170, 30));
 
-        jPanel4.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 220, 30));
+        jPanel4.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 170, 30));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("Aeroporto de destino:");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 150, -1));
+        jLabel9.setText("Aeroporto de destino (IATA):");
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 180, -1));
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel25.setText("Companhia aérea:");
-        jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, -1, -1));
+        jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
 
         jFormattedTextField10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jPanel4.add(jFormattedTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 220, 30));
+        jPanel4.add(jFormattedTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 240, 30));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/accept.png"))); // NOI18N
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
         jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, 40));
 
         jTabbedPane1.addTab("Cadastrar  ", new javax.swing.ImageIcon(getClass().getResource("/imagens/accept.png")), jPanel4); // NOI18N
@@ -194,13 +219,9 @@ public class VoosUI extends javax.swing.JDialog
         jPanel5.setMinimumSize(new java.awt.Dimension(12, 11));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-        jLabel27.setText("Companhia aérea com mais voos:");
-        jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -2, -1, 20));
-
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         jLabel28.setText("Total de voos:");
-        jPanel5.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, -2, -1, 20));
+        jPanel5.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, -2, -1, 20));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 490, 20));
 
@@ -215,16 +236,19 @@ public class VoosUI extends javax.swing.JDialog
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentShown
-
-    }//GEN-LAST:event_jPanel2ComponentShown
-
     private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1ComponentShown
-         try
-        {
+        try
+        {     
+            int totalVoos = 0;
+            for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
+            {   
+                for(int i2 = 0; i2 < parent.getListaAeroportos().getPos(i).getVoos().getQtd(); i2++)
+                {
+                    totalVoos++;
+                }
+            }
             
-            jLabel28.setText("Total de voos: " + 90);
-            jLabel27.setText("Companhia aérea com mais voos: " + "TAM");
+            jLabel28.setText("Total de voos: " + totalVoos);
             
             DefaultTableModel model = new DefaultTableModel()
             {
@@ -240,28 +264,122 @@ public class VoosUI extends javax.swing.JDialog
             model.addColumn("Aeroporto de destino");
             model.addColumn("Companhia aérea");
             
-            model.addRow(new Object[]{"ee",
-                                      "ee",
-                                      "ee",
-                                      "ee",
-                                      "ee"});
+            for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
+            {   
+                for(int i2 = 0; i2 < parent.getListaAeroportos().getPos(i).getVoos().getQtd(); i2++)
+                {
+                    model.addRow(new Object[]{parent.getListaAeroportos().getPos(i).getVoos().getPos(i2).getNumeroVoo(),
+                                              parent.getListaAeroportos().getPos(i).getVoos().getPos(i2).getAeroOrigem(),
+                                              parent.getListaAeroportos().getPos(i).getVoos().getPos(i2).getAeroDestino(),
+                                              parent.getListaAeroportos().getPos(i).getVoos().getPos(i2).getCompanhiaOperadora()});
+                }
+            }
             
             jTable2.setModel(model);
             formatarColunasDaTabela(); 
+            
         }
-        catch (Exception erro)
+        catch (Exception e)
         {}       
     }//GEN-LAST:event_jPanel1ComponentShown
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         if (!isClickeable)
             return;
+       
+        try
+        {  
+           if (JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja excluir? Não é possível desfazer esta ação.", " Aviso", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) 
+           {
+                for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
+                {   
+                    for(int i2 = 0; i2 < parent.getListaAeroportos().getPos(i).getVoos().getQtd(); i2++)
+                    { 
+                        if(parent.getListaAeroportos().getPos(i).getVoos().getPos(i2).getNumeroVoo() == Integer.parseInt(jFormattedTextField6.getText()))
+                        {
+                            parent.getListaAeroportos().getPos(i).getVoos().remova(parent.getListaAeroportos().getPos(i).getVoos().getPos(i2));
+                            limparTelaConsulta();
+                            isClickeable = false;
+                            jButton2.setEnabled(false);
+                        }
+                    }
+                }
+            }
+        } 
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "O número do voo deve ser preenchido", " Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        try
+        {
+            Voo vooCad = new Voo(Integer.parseInt(jFormattedTextField9.getText()), jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(), jFormattedTextField10.getText());
+
+            for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
+            {   
+                if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jComboBox3.getSelectedItem().toString().toUpperCase()))
+                {
+                    parent.getListaAeroportos().getPos(i).addVoo(vooCad);
+                    JOptionPane.showMessageDialog(null, "Voo cadastrado com sucesso!", " Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    limparTelaCadastro();
+                }
+            }       
+        } 
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Todos os dados devem ser preenchidos", " Erro", JOptionPane.ERROR_MESSAGE);
+        }
+          
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        try
+        {   
+            if(jFormattedTextField5.getText().equals("") && jFormattedTextField6.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Digite os dados do voo a ser procurado", " Erro", JOptionPane.ERROR_MESSAGE);
+                return;  
+            }
+            boolean existeVoo = false;
+            for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
+            {              
+                if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jFormattedTextField5.getText().toUpperCase()))
+                {
+                    for(int a = 0; a < parent.getListaAeroportos().getPos(i).getVoos().getQtd(); a++)
+                    {
+                        existeVoo = false;
+                        if(parent.getListaAeroportos().getPos(i).getVoos().getPos(a).getNumeroVoo() == Integer.parseInt(jFormattedTextField6.getText()))
+                        {
+                            Voo v = parent.getListaAeroportos().getPos(i).getVoos().getPos(a);
+                            jFormattedTextField8.setText(v.getAeroOrigem());
+                            jFormattedTextField11.setText(v.getAeroDestino());
+                            jFormattedTextField12.setText(v.getCompanhiaOperadora());
+                            existeVoo = true;
+                        }          
+                    }                     
+                }
+            }
+            if(!existeVoo)
+            {
+                JOptionPane.showMessageDialog(null, "Voo não encontrado", " Erro", JOptionPane.ERROR_MESSAGE);
+                limparTelaConsulta();         
+            }
+            else
+            {
+                isClickeable = true;
+                jButton2.setEnabled(true);
+            }
+        } 
+        catch(Exception e)
+        {}
+    }//GEN-LAST:event_jButton1MouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VoosUI dialog = new VoosUI(new javax.swing.JFrame(), true);
+                VoosUI dialog = new VoosUI(new HomeUI(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -283,6 +401,7 @@ public class VoosUI extends javax.swing.JDialog
     private javax.swing.JFormattedTextField jFormattedTextField11;
     private javax.swing.JFormattedTextField jFormattedTextField12;
     private javax.swing.JFormattedTextField jFormattedTextField5;
+    private javax.swing.JFormattedTextField jFormattedTextField6;
     private javax.swing.JFormattedTextField jFormattedTextField8;
     private javax.swing.JFormattedTextField jFormattedTextField9;
     private javax.swing.JLabel jLabel1;
@@ -291,8 +410,8 @@ public class VoosUI extends javax.swing.JDialog
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -307,18 +426,12 @@ public class VoosUI extends javax.swing.JDialog
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 
-
-    public static boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
-    }
-    
     private void formatarColunasDaTabela() 
     {
         jTable2.getColumnModel().getColumn(0).setPreferredWidth(30);
         jTable2.getColumnModel().getColumn(1).setPreferredWidth(100);
         jTable2.getColumnModel().getColumn(2).setPreferredWidth(100);
         jTable2.getColumnModel().getColumn(3).setPreferredWidth(100);
-        jTable2.getColumnModel().getColumn(4).setPreferredWidth(100);
         
         DefaultTableCellRenderer esquerda = new DefaultTableCellRenderer();
         DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
@@ -328,10 +441,26 @@ public class VoosUI extends javax.swing.JDialog
         centralizado.setHorizontalAlignment(SwingConstants.CENTER);
         direita.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        jTable2.getColumnModel().getColumn(0).setCellRenderer(direita);
+        jTable2.getColumnModel().getColumn(0).setCellRenderer(esquerda);
         jTable2.getColumnModel().getColumn(1).setCellRenderer(esquerda);
         jTable2.getColumnModel().getColumn(2).setCellRenderer(esquerda);
         jTable2.getColumnModel().getColumn(3).setCellRenderer(esquerda);
-        jTable2.getColumnModel().getColumn(4).setCellRenderer(centralizado);
+    }
+    
+     private void limparTelaCadastro()
+    {
+        jFormattedTextField9.setText("");
+        jFormattedTextField10.setText("");
+        jComboBox4.setSelectedIndex(0);
+        jComboBox3.setSelectedIndex(0);
+    }
+    
+    private void limparTelaConsulta()
+    {
+        jFormattedTextField5.setText("");
+        jFormattedTextField6.setText("");
+        jFormattedTextField8.setText("");
+        jFormattedTextField11.setText("");
+        jFormattedTextField12.setText("");
     }
 }

@@ -1,25 +1,26 @@
 package classes;
 
 import java.lang.reflect.*;
+import java.util.ArrayList; 
 
 public class ListaDuplamenteLigadaDesordenada <X>
-{
+{  
     protected class No
     {
-		private No ante;
+	private No ante;
         private X  info;
         private No prox;
 
         public No (No a, X i, No p)
         {
-			this.ante = a;
+            this.ante = a;
             this.info = i;
             this.prox = p;
         }
 
         public No (X i)
         {
-			this.ante = null;
+            this.ante = null;
             this.info = i;
             this.prox = null;
         }
@@ -53,80 +54,68 @@ public class ListaDuplamenteLigadaDesordenada <X>
         {
             this.prox = p;
         }
-    } //fim da classe No
-
-    // PASSADO
-    // PARA
-    // REVISAR
-    // TUDO,
-    // TUDINHO
-    // MESMO,
-    // DAQUI
-    // PARA
-    // FRENTE;
-    // REVISADO!!!
+    } 
 
     protected No primeiro, ultimo;
 
-    public ListaDuplamenteLigadaDesordenada ()
+    public ListaDuplamenteLigadaDesordenada()
     {
-		this.primeiro=this.ultimo=null;
-	}
+        this.primeiro = this.ultimo = null;
+    }
 
     protected X meuCloneDeX (X x)
     {
-      //return (X)x.clone();
-
         X ret=null;
 
         try
         {
             Class<?> classe = x.getClass();
-            Class<?>[] tiposDosParms = null; // null pq clone nao tem parametros
+            Class<?>[] tiposDosParms = null;
             Method metodo = classe.getMethod("clone",tiposDosParms);
-            Object[] parms = null; // null pq clone nao tem parametros
+            Object[] parms = null;
             ret = (X)metodo.invoke(x,parms);
         }
         catch (Exception erro)
-        {} // pq sei que estou chamando clone de um objeto que é Cloneable e, portanto, nao há risco do método não existir ou de ser chamado com parametros errado
+        {} 
 
         return ret;
     }
 
     public void insiraNoInicio (X i) throws Exception
     {
-        if (i==null)
+        if (i == null)
             throw new Exception ("Informacao ausente");
 
-        X inserir=null;
+        X inserir = null;
+        
         if (i instanceof Cloneable)
             inserir = meuCloneDeX (i);
         else
             inserir = i;
             
-        this.primeiro = new No (null,inserir,this.primeiro);
+        this.primeiro = new No (null, inserir, this.primeiro);
 
-        if (this.primeiro.getProx()!=null)
+        if (this.primeiro.getProx()!= null)
             this.primeiro.getProx().setAnte (this.primeiro);
 
         this.primeiro.setAnte (null);
         
-        if (this.ultimo==null)
-            this.ultimo=this.primeiro;
+        if (this.ultimo == null)
+            this.ultimo = this.primeiro;
     }
 
     public void insiraNoFim (X i) throws Exception
     {
-        if (i==null)
+        if (i == null)
             throw new Exception ("Informacao ausente");
 
-        X inserir=null;
+        X inserir = null;
         if (i instanceof Cloneable)
             inserir = meuCloneDeX (i);
         else
             inserir = i;
             
-        if (this.ultimo==null) // && this.primeiro==null
+        if (this.ultimo == null) // && this.primeiro==null
         {
             this.ultimo   = new No (inserir);
             this.primeiro = this.ultimo;
@@ -269,6 +258,23 @@ public class ListaDuplamenteLigadaDesordenada <X>
             
         return ret;
     }
+    
+    public X getPos (int pos) throws Exception
+    {
+        if (this.primeiro==null/*&&this.fim==null)*/)
+            throw new Exception ("Nada a obter");
+
+        No  atual=this.primeiro;
+        int ret  = 1;
+
+        while (atual!=null && ret <= pos)
+        {
+            ret++;                
+            atual = atual.getProx();
+        }
+        
+        return atual.getInfo();
+    }
 
     public X getDoFim () throws Exception
     {
@@ -337,6 +343,7 @@ public class ListaDuplamenteLigadaDesordenada <X>
         return ret;
 	}
 
+    @Override
     public String toString ()
     {
         String ret="[";
@@ -355,7 +362,30 @@ public class ListaDuplamenteLigadaDesordenada <X>
 
         return ret+"]";
     }
+    
+    public ArrayList<X> toArrayList ()
+    {
+        ArrayList<X> ret = new ArrayList<X>();
+        
+        try
+        {
+            No atual = this.primeiro;
+            
+            while(atual != null)
+            {
+                ret.add(atual.getInfo());
+                atual = atual.getProx();
+            }
+            
+        }
+        catch (Exception e)
+        {}      
+        
+        return ret;
+    }
+    
 
+    @Override
     public boolean equals (Object obj)
     {
         if (this==obj)
@@ -382,16 +412,16 @@ public class ListaDuplamenteLigadaDesordenada <X>
             atualLista = atualLista.getProx();
         }
 
-        if (atualThis!=null  /* && atualLista==null */)
+        if (atualThis != null )
             return false;
 
-        if (atualLista!=null /* && atualThis ==null */)
+        if (atualLista != null)
             return false;
 
-        // atualThis==null && atualLista==null
         return true;
     }
 
+    @Override
     public int hashCode ()
     {
         final int PRIMO = 13; // qualquer número primo serve
@@ -408,7 +438,7 @@ public class ListaDuplamenteLigadaDesordenada <X>
         return ret;
     }
 
-    // construtor de copia
+
     public ListaDuplamenteLigadaDesordenada (ListaDuplamenteLigadaDesordenada<X> modelo) throws Exception
     {
         if (modelo==null)
@@ -432,6 +462,7 @@ public class ListaDuplamenteLigadaDesordenada <X>
         this.ultimo = atualDoThis;
     }
 
+    @Override
     public Object clone ()
     {
         ListaDuplamenteLigadaDesordenada<X> ret=null;

@@ -1,17 +1,14 @@
 package classes;
 
 /**
- *
- * @author Rodrigo
+ * @author Eduardo Migueis, Rodrigo Smith and Manuela Benassi.
+ * @since 2020.
  */
 public class Paises {
-    /**
-     * classe de vetor que contém os países dos voos
-     * 
-     * @param PAISES
-     */
 
-    public final static String[] PAISES = new String[]{"Afghanistan",
+    public final static String[] PAISES = new String[]
+    {
+        "Afghanistan",
         "Albania",
         "Algeria",
         "American Samoa",

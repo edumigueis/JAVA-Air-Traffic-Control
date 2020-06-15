@@ -1,11 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package classes;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Eduardo Migueis, Rodrigo Smith and Manuela Benassi.
@@ -13,7 +6,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Aeroporto implements Cloneable
 {
-    static AtomicInteger nextId = new AtomicInteger();
     private int idAeroporto;
     private String codigoIATA = "";
     private String codigoICAO = "";
@@ -23,76 +15,84 @@ public class Aeroporto implements Cloneable
     private final ListaDuplamenteLigadaDesordenada<Voo> listaVoos;
 
     /**
-     * Construtor da classe Aeroporto
-     * 
-     * @param codigoIATA
-     * @param codigoICAO
-     * @param nome
-     * @param pais
-     * @param cidade
+     * Construtor da classe Aeroporto 
+     * @param codigoIATA código IATA do aeroporto
+     * @param codigoICAO código ICAO do aeroporto
+     * @param nome nome do aeroporto
+     * @param pais país onde se localiza o aeroporto
+     * @param cidade cidade onde se localiza o aeroporto
+     * @throws Exception é lançada uma exceção se algum parâmetro do tipo String for uma cadeia vazia.
      */
-    public Aeroporto(String codigoIATA, String codigoICAO, String nome, String pais, String cidade)
+    public Aeroporto(String codigoIATA, String codigoICAO, String nome, String pais, String cidade) throws Exception
     {
+        if(codigoIATA.equals("") || codigoICAO.equals("") || nome.equals("") || pais.equals("") || cidade.equals(""))
+            throw new Exception("Dados ausentes");
+        
         this.codigoIATA = codigoIATA;
         this.codigoICAO = codigoICAO;
         this.nomeAero = nome;
         this.pais = pais;
         this.cidade = cidade;
-        this.listaVoos = new ListaDuplamenteLigadaDesordenada<Voo>();
-        this.idAeroporto = nextId.incrementAndGet();
+        this.listaVoos = new ListaDuplamenteLigadaDesordenada<>();
     }
+    
     /**
      * Pega o codigoIATA
-     * @return codigoIATA
-     */
-    
+     * @return retorna o código ICAO do aeroporto
+     */    
     public String getCodigoIATA()
     {
         return this.codigoIATA;
     }
+    
     /**
      * Pega o codigoICAO
-     * @return codigoICAO
+     * @return retorna o código ICAO do aeroporto
      */
     public String getCodigoICAO()
     {
         return this.codigoICAO;
     }
+    
     /**
      * Pega o nome do aeroporto
-     * @return nomeAero
+     * @return retorna o nome do aeroporto
      */
     public String getNome()
     {
         return this.nomeAero;
     }
+    
     /**
      * Pega o país
-     * @return pais
+     * @return retorna o pais
      */
     public String getPais()
     {
         return this.pais;
     }
+    
     /**
      * Pega a cidade
-     * @return cidade
+     * @return retorna a cidade
      */
     public String getCidade()
     {
         return this.cidade;
     }
+    
     /**
      * Pega os voos da lista
-     * @return
+     * @return retorna a lista de voos
      */
     public ListaDuplamenteLigadaDesordenada<Voo> getVoos()
     {
         return this.listaVoos;
     }
+    
     /**
-     * Dá o valor do parametro ao Código IATA
-     * @param codigo
+     * Seta o valor do parametro ao Código IATA
+     * @param codigo codigo a ser setado
      * @throws Exception Código IATA é inválido
      */
     public void setCodigoIATA(String codigo) throws Exception
@@ -102,11 +102,12 @@ public class Aeroporto implements Cloneable
             throw new Exception("Código IATA inválido.");
         }
         else
-        this.codigoIATA = codigo;
+            this.codigoIATA = codigo;
     }
+    
     /**
-     * Dá o valor do parametro ao Código ICAO
-     * @param codigo
+     * Seta o valor do parametro ao Código ICAO
+     * @param codigo codigo a ser setado
      * @throws Exception Código ICAO é inválido
      */
     public void setCodigoICAO(String codigo) throws Exception
@@ -116,11 +117,12 @@ public class Aeroporto implements Cloneable
             throw new Exception("Código ICAO inválido.");
         }
         else
-        this.codigoICAO = codigo;
+            this.codigoICAO = codigo;
     }
+    
     /**
-     * Dá o valor do parametro ao nome
-     * @param nome
+     * Seta o valor do parametro ao nome
+     * @param nome nome a ser setado
      * @throws Exception nome passado é inválido
      */
     public void setNome(String nome) throws Exception
@@ -130,11 +132,12 @@ public class Aeroporto implements Cloneable
             throw new Exception("Nome inválido.");
         }
         else
-        this.nomeAero = nome;
+            this.nomeAero = nome;
     }
+    
     /**
-     * Dá o valor do parametro ao pais
-     * @param pais
+     * Seta o valor do parametro ao pais
+     * @param pais país a ser setado
      * @throws Exception país passado é inválido
      */
     public void setPais(String pais) throws Exception
@@ -144,11 +147,12 @@ public class Aeroporto implements Cloneable
             throw new Exception("País inválido.");
         }
         else
-        this.pais = pais;
+            this.pais = pais;
     }
+    
     /**
-     * Dá o valor do parametro a cidade
-     * @param cidade
+     * Seta o valor do parametro à cidade
+     * @param cidade cidade a ser setada
      * @throws Exception cidade passada é inválido
      */
     public void setCidade(String cidade) throws Exception
@@ -160,50 +164,75 @@ public class Aeroporto implements Cloneable
         else
         this.cidade = cidade;
     }
+    
+    public void addVoo(Voo voo) throws Exception
+    {
+        if(voo == null)
+        {
+            throw new Exception("Voo inválido.");
+        }
+        else
+        this.listaVoos.insiraNoFim(voo);
+    }
+    
      /**
      * Constrói uma string que representa a classe
      * @return uma string com os atributos
      */
-    public String toString(){
-        return "IdAeroporto: " + this.idAeroporto + "" + " codigo IATA: " + codigoIATA + " codigo ICAO " + codigoICAO +
-        " nome areporto " + nomeAero + " pais: " + pais + " cidade " + cidade;
-
+    @Override
+    public String toString(){    
+        return 
+        "Codigo IATA: " + codigoIATA + "\n" +
+        "Codigo ICAO: " + codigoICAO + "\n" +
+        "Nome areporto: " + nomeAero + "\n" +
+        "País: " + pais + "\n" +
+        "Cidade: " + cidade;
     }
+    
     /**
      * Constrói o hashCode da classe
      * @return hashCode da classe
      */
+    @Override
     public int hashCode(){
         int ret = 111;
         ret = ret *5 + this.cidade.hashCode();
         ret = ret * 5 + this.codigoIATA.hashCode();
         ret = ret * 5 + this.codigoICAO.hashCode();
-        ret = ret * 5 + new Integer(this.idAeroporto).haschCode();
+        ret = ret * 5 + new Integer(this.idAeroporto).hashCode();
         ret = ret * 5 + this.nomeAero.hashCode();
         ret = ret * 5 + this.pais.hashCode();
+        
         if(ret<0)
             ret = -ret;
 
         return ret;
     }
+    
      /**
      * Clona a classe
      * @return o clone
      */
-    public Object clone(){
+    @Override
+    public Object clone()
+    {
         Aeroporto clone = null;
-        try{
-            Aeroporto = new Aeroporto(this);
+        try
+        {
+            clone = new Aeroporto(this);
         }
-        catch(Exception e){}
+        catch(Exception e)
+        {}
+        
         return clone;
-
     }
+    
     /**
      * Compara se a classe passada é igual a essa
-     * @param obj
-     * @return
+     * @param obj objeto a ser verificado se é igual à instância chamante do método
+     * @return ture se forem iguais e, false, se não
      */
+    @Override
     public boolean equals(Object obj){
         if(obj == null)
             return false;
@@ -219,19 +248,20 @@ public class Aeroporto implements Cloneable
     }
      /**
      * Atribui os valores do modelo a essa classe
-     * @param modelo
+     * @param modelo objeto a ser clonado
+     * @throws Exception é lançada uma exceção se o parâmetro for nulo
      */
-    public Aeroporto(Aeroporto modelo){
-        if(modelo == null){
+    public Aeroporto(Aeroporto modelo) throws Exception
+    {
+        if(modelo == null)
+        {
             throw new Exception("modelo para cópia não pode ser nulo");
         }
         this.cidade = modelo.cidade;
         this.codigoIATA = modelo.codigoIATA;
         this.codigoICAO = modelo.codigoICAO;
-        this.idAeroporto = modelo.idAeroporto;
         this.nomeAero = modelo.nomeAero;
         this.pais = modelo.pais;
-    }
-
-    
+        this.listaVoos = modelo.listaVoos;
+    }  
 }
