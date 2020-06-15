@@ -1,7 +1,5 @@
 package classes;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * @author Eduardo Migueis, Rodrigo Smith and Manuela Benassi.
  * @since 2020.
@@ -222,5 +220,4 @@ public class Voo implements Cloneable
         this.numeroVoo = modelo.numeroVoo;
         this.aeroOrigem = modelo.aeroOrigem;
     }
-
 }

@@ -6,7 +6,6 @@ package classes;
  */
 public class Aeroporto implements Cloneable
 {
-    private int idAeroporto;
     private String codigoIATA = "";
     private String codigoICAO = "";
     private String nomeAero = "";
@@ -199,7 +198,6 @@ public class Aeroporto implements Cloneable
         ret = ret *5 + this.cidade.hashCode();
         ret = ret * 5 + this.codigoIATA.hashCode();
         ret = ret * 5 + this.codigoICAO.hashCode();
-        ret = ret * 5 + new Integer(this.idAeroporto).hashCode();
         ret = ret * 5 + this.nomeAero.hashCode();
         ret = ret * 5 + this.pais.hashCode();
         
@@ -242,7 +240,7 @@ public class Aeroporto implements Cloneable
             return false;
         Aeroporto aero = (Aeroporto) obj;
         if(!this.cidade.equals(aero.cidade) || !this.pais.equals(aero.pais) || !this.codigoIATA.equals(aero.codigoIATA) ||
-       !this.codigoICAO.equals(aero.codigoICAO) || this.idAeroporto != aero.idAeroporto || !this.nomeAero.equals(aero.nomeAero))
+       !this.codigoICAO.equals(aero.codigoICAO) || !this.nomeAero.equals(aero.nomeAero))
             return false;
         return true;
     }
