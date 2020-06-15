@@ -349,6 +349,11 @@ public class AeroportosUI extends javax.swing.JDialog
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try
         {
+            if(jFormattedTextField3.getText().equals("") && jFormattedTextField11.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Digite os dados do aeroporto a ser procurado", " Erro", JOptionPane.ERROR_MESSAGE);
+                return;  
+            }
             boolean existe = false;
             
             for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)

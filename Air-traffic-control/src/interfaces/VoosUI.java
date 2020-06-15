@@ -1,7 +1,6 @@
 package interfaces;
 
 import classes.*;
-import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -289,22 +288,25 @@ public class VoosUI extends javax.swing.JDialog
             return;
        
         try
-        {                          
-            for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
-            {   
-                for(int i2 = 0; i2 < parent.getListaAeroportos().getPos(i).getVoos().getQtd(); i2++)
-                { 
-                    if(parent.getListaAeroportos().getPos(i).getVoos().getPos(i2).getNumeroVoo() == Integer.parseInt(jFormattedTextField6.getText()))
-                    {
-                        parent.getListaAeroportos().getPos(i).getVoos().remova(parent.getListaAeroportos().getPos(i).getVoos().getPos(i2));
-                        limparTelaConsulta();
-                        isClickeable = false;
-                        jButton2.setEnabled(false);
+        {  
+           if (JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja excluir? Não é possível desfazer esta ação.", " Aviso", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) 
+           {
+                for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
+                {   
+                    for(int i2 = 0; i2 < parent.getListaAeroportos().getPos(i).getVoos().getQtd(); i2++)
+                    { 
+                        if(parent.getListaAeroportos().getPos(i).getVoos().getPos(i2).getNumeroVoo() == Integer.parseInt(jFormattedTextField6.getText()))
+                        {
+                            parent.getListaAeroportos().getPos(i).getVoos().remova(parent.getListaAeroportos().getPos(i).getVoos().getPos(i2));
+                            limparTelaConsulta();
+                            isClickeable = false;
+                            jButton2.setEnabled(false);
+                        }
                     }
                 }
             }
         } 
-        catch(Exception ex)
+        catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "O número do voo deve ser preenchido", " Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -313,20 +315,17 @@ public class VoosUI extends javax.swing.JDialog
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         try
         {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza de que deseja excluir? Não é possível desfazer esta ação.", " Aviso", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) 
-            {
-                Voo vooCad = new Voo(Integer.parseInt(jFormattedTextField9.getText()), jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(), jFormattedTextField10.getText());
+            Voo vooCad = new Voo(Integer.parseInt(jFormattedTextField9.getText()), jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(), jFormattedTextField10.getText());
 
-                for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
-                {   
-                    if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jComboBox3.getSelectedItem().toString().toUpperCase()))
-                    {
-                        parent.getListaAeroportos().getPos(i).addVoo(vooCad);
-                        JOptionPane.showMessageDialog(null, "Voo cadastrado com sucesso!", " Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                        limparTelaCadastro();
-                    }
+            for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
+            {   
+                if(parent.getListaAeroportos().getPos(i).getCodigoIATA().toUpperCase().equals(jComboBox3.getSelectedItem().toString().toUpperCase()))
+                {
+                    parent.getListaAeroportos().getPos(i).addVoo(vooCad);
+                    JOptionPane.showMessageDialog(null, "Voo cadastrado com sucesso!", " Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    limparTelaCadastro();
                 }
-            }
+            }       
         } 
         catch(Exception e)
         {
@@ -338,6 +337,11 @@ public class VoosUI extends javax.swing.JDialog
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try
         {   
+            if(jFormattedTextField5.getText().equals("") && jFormattedTextField6.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Digite os dados do voo a ser procurado", " Erro", JOptionPane.ERROR_MESSAGE);
+                return;  
+            }
             boolean existeVoo = false;
             for(int i = 0; i < parent.getListaAeroportos().getQtd(); i++)
             {              

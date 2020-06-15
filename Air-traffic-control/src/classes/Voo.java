@@ -9,7 +9,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Voo implements Cloneable
 {
     private int idVoo;
-    static AtomicInteger nextId = new AtomicInteger();
     private int numeroVoo = 0;
     private String aeroOrigem = "";
     private String aeroDestino = "";
@@ -21,6 +20,7 @@ public class Voo implements Cloneable
      * @param companhiaOperadora companhia aérea
      * @param aeroOrigem aeroporto de origem
      * @param aeroDestino aeroporto de destino
+     * @throws Exception é lançada uma exceção se algum parâmetro do tipo String for uma cadeia vazia ou do tipo Integer, negativo.
      */
     public Voo(int numeroVoo, String aeroOrigem, String aeroDestino, String companhiaOperadora) throws Exception 
     {
@@ -31,12 +31,11 @@ public class Voo implements Cloneable
         this.aeroOrigem = aeroOrigem;
         this.aeroDestino = aeroDestino;
         this.companhiaOperadora = companhiaOperadora;
-        this.idVoo = nextId.incrementAndGet();
     }
     
     /**
      * pega o numero do voo
-     * @return numeroVoo
+     * @return retorna o número do voo
     */
     public int getNumeroVoo() 
     {
@@ -45,7 +44,7 @@ public class Voo implements Cloneable
     
     /**
      * pega a companhia Operadora
-     * @return companhiaOperadora
+     * @return retorna a companhia operadora
      */
     public String getCompanhiaOperadora() 
     {
@@ -54,7 +53,7 @@ public class Voo implements Cloneable
     
     /**
      * pega o aeroporto de origem
-     * @return aeroOrigem
+     * @return retorna o aeroporto de origem do voo
      */
     public String getAeroOrigem() 
     {
@@ -63,7 +62,7 @@ public class Voo implements Cloneable
     
     /**
      * pega o aeroporto de destino
-     * @return aeroDestino 
+     * @return retorna o aeroporto de destino do voo 
      */
     public String getAeroDestino() 
     {
@@ -71,8 +70,8 @@ public class Voo implements Cloneable
     }
     
     /**
-     * da o valor do parametro a companhia operadora
-     * @param comp
+     * seta o valor do parametro à companhia operadora
+     * @param comp companhia aérea a ser setada
      * @throws Exception nome passado é inválido
      */
     public void setCompanhiaOperadora(String comp) throws Exception 
@@ -88,8 +87,8 @@ public class Voo implements Cloneable
     }
     
     /**
-     * da o valor do parametro ao nome do aeroporto
-     * @param aerOr
+     * seta o valor do parametro ao nome do aeroporto
+     * @param aerOr aeroporto de origem a ser setado
      * @throws Exception nome passado é inválido
      */
     public void setAeroOrigem(String aerOr) throws Exception 
@@ -105,8 +104,8 @@ public class Voo implements Cloneable
     }
     
     /**
-     * da o valor do parametro ao aeroporto de destino
-     * @param aerDes
+     * seta o valor do parametro ao aeroporto de destino
+     * @param aerDes aeroporto de destino a ser setado
      * @throws Exception nome passado é inválido
      */
     public void setAeroDestino(String aerDes) throws Exception 
@@ -120,8 +119,8 @@ public class Voo implements Cloneable
         }
     }
     /**
-     * da o valor do parametro ao nuumero do voo
-     * @param nmr
+     * seta o valor do parametro ao nuumero do voo
+     * @param nmr número de voo a ser setado
      * @throws Exception numero do voo passado é inválido
      */
 
@@ -143,8 +142,11 @@ public class Voo implements Cloneable
      */
     @Override
     public String toString(){
-        return "Número do voo: " + numeroVoo + " " + ", aeroporto de origem " + aeroOrigem + ", aeroporto de destino:  " + aeroDestino +
-        ", companhia operadora: " + companhiaOperadora + ", idVoo: " + idVoo ;
+        return 
+        "Número do voo: " + numeroVoo + "\n" +
+        "Aeroporto de origem: " + aeroOrigem + "\n" +
+        "Aeroporto de destino: " + aeroDestino + "\n" +
+        "Companhia operadora: " + companhiaOperadora;
     }
     
     /**
@@ -185,8 +187,8 @@ public class Voo implements Cloneable
     
     /**
      * Compara se a classe passada é igual a essa
-     * @param obj
-     * @return
+     * @param obj objeto a ser verificado se é igual à instância chamante do método
+     * @return ture se forem iguais e, false, se não
      */
     @Override
     public boolean equals(Object obj)

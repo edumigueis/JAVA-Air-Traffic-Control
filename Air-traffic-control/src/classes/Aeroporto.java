@@ -1,14 +1,11 @@
 package classes;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * @author Eduardo Migueis, Rodrigo Smith and Manuela Benassi.
  * @since 2020.
  */
 public class Aeroporto implements Cloneable
 {
-    static AtomicInteger nextId = new AtomicInteger();
     private int idAeroporto;
     private String codigoIATA = "";
     private String codigoICAO = "";
@@ -24,21 +21,24 @@ public class Aeroporto implements Cloneable
      * @param nome nome do aeroporto
      * @param pais país onde se localiza o aeroporto
      * @param cidade cidade onde se localiza o aeroporto
+     * @throws Exception é lançada uma exceção se algum parâmetro do tipo String for uma cadeia vazia.
      */
-    public Aeroporto(String codigoIATA, String codigoICAO, String nome, String pais, String cidade)
+    public Aeroporto(String codigoIATA, String codigoICAO, String nome, String pais, String cidade) throws Exception
     {
+        if(codigoIATA.equals("") || codigoICAO.equals("") || nome.equals("") || pais.equals("") || cidade.equals(""))
+            throw new Exception("Dados ausentes");
+        
         this.codigoIATA = codigoIATA;
         this.codigoICAO = codigoICAO;
         this.nomeAero = nome;
         this.pais = pais;
         this.cidade = cidade;
         this.listaVoos = new ListaDuplamenteLigadaDesordenada<>();
-        this.idAeroporto = nextId.incrementAndGet();
     }
     
     /**
      * Pega o codigoIATA
-     * @return codigoIATA
+     * @return retorna o código ICAO do aeroporto
      */    
     public String getCodigoIATA()
     {
@@ -47,7 +47,7 @@ public class Aeroporto implements Cloneable
     
     /**
      * Pega o codigoICAO
-     * @return codigoICAO
+     * @return retorna o código ICAO do aeroporto
      */
     public String getCodigoICAO()
     {
@@ -56,7 +56,7 @@ public class Aeroporto implements Cloneable
     
     /**
      * Pega o nome do aeroporto
-     * @return nomeAero
+     * @return retorna o nome do aeroporto
      */
     public String getNome()
     {
@@ -65,7 +65,7 @@ public class Aeroporto implements Cloneable
     
     /**
      * Pega o país
-     * @return pais
+     * @return retorna o pais
      */
     public String getPais()
     {
@@ -74,7 +74,7 @@ public class Aeroporto implements Cloneable
     
     /**
      * Pega a cidade
-     * @return cidade
+     * @return retorna a cidade
      */
     public String getCidade()
     {
@@ -83,7 +83,7 @@ public class Aeroporto implements Cloneable
     
     /**
      * Pega os voos da lista
-     * @return
+     * @return retorna a lista de voos
      */
     public ListaDuplamenteLigadaDesordenada<Voo> getVoos()
     {
@@ -91,8 +91,8 @@ public class Aeroporto implements Cloneable
     }
     
     /**
-     * Dá o valor do parametro ao Código IATA
-     * @param codigo
+     * Seta o valor do parametro ao Código IATA
+     * @param codigo codigo a ser setado
      * @throws Exception Código IATA é inválido
      */
     public void setCodigoIATA(String codigo) throws Exception
@@ -106,8 +106,8 @@ public class Aeroporto implements Cloneable
     }
     
     /**
-     * Dá o valor do parametro ao Código ICAO
-     * @param codigo
+     * Seta o valor do parametro ao Código ICAO
+     * @param codigo codigo a ser setado
      * @throws Exception Código ICAO é inválido
      */
     public void setCodigoICAO(String codigo) throws Exception
@@ -121,8 +121,8 @@ public class Aeroporto implements Cloneable
     }
     
     /**
-     * Dá o valor do parametro ao nome
-     * @param nome
+     * Seta o valor do parametro ao nome
+     * @param nome nome a ser setado
      * @throws Exception nome passado é inválido
      */
     public void setNome(String nome) throws Exception
@@ -136,8 +136,8 @@ public class Aeroporto implements Cloneable
     }
     
     /**
-     * Dá o valor do parametro ao pais
-     * @param pais
+     * Seta o valor do parametro ao pais
+     * @param pais país a ser setado
      * @throws Exception país passado é inválido
      */
     public void setPais(String pais) throws Exception
@@ -151,8 +151,8 @@ public class Aeroporto implements Cloneable
     }
     
     /**
-     * Dá o valor do parametro a cidade
-     * @param cidade
+     * Seta o valor do parametro à cidade
+     * @param cidade cidade a ser setada
      * @throws Exception cidade passada é inválido
      */
     public void setCidade(String cidade) throws Exception
@@ -180,10 +180,13 @@ public class Aeroporto implements Cloneable
      * @return uma string com os atributos
      */
     @Override
-    public String toString(){
-        return "IdAeroporto: " + this.idAeroporto + "" + " codigo IATA: " + codigoIATA + " codigo ICAO " + codigoICAO +
-        " nome areporto " + nomeAero + " pais: " + pais + " cidade " + cidade;
-
+    public String toString(){    
+        return 
+        "Codigo IATA: " + codigoIATA + "\n" +
+        "Codigo ICAO: " + codigoICAO + "\n" +
+        "Nome areporto: " + nomeAero + "\n" +
+        "País: " + pais + "\n" +
+        "Cidade: " + cidade;
     }
     
     /**
@@ -199,6 +202,7 @@ public class Aeroporto implements Cloneable
         ret = ret * 5 + new Integer(this.idAeroporto).hashCode();
         ret = ret * 5 + this.nomeAero.hashCode();
         ret = ret * 5 + this.pais.hashCode();
+        
         if(ret<0)
             ret = -ret;
 
@@ -225,8 +229,8 @@ public class Aeroporto implements Cloneable
     
     /**
      * Compara se a classe passada é igual a essa
-     * @param obj
-     * @return
+     * @param obj objeto a ser verificado se é igual à instância chamante do método
+     * @return ture se forem iguais e, false, se não
      */
     @Override
     public boolean equals(Object obj){
@@ -244,7 +248,7 @@ public class Aeroporto implements Cloneable
     }
      /**
      * Atribui os valores do modelo a essa classe
-     * @param modelo
+     * @param modelo objeto a ser clonado
      * @throws Exception é lançada uma exceção se o parâmetro for nulo
      */
     public Aeroporto(Aeroporto modelo) throws Exception
@@ -256,7 +260,6 @@ public class Aeroporto implements Cloneable
         this.cidade = modelo.cidade;
         this.codigoIATA = modelo.codigoIATA;
         this.codigoICAO = modelo.codigoICAO;
-        this.idAeroporto = modelo.idAeroporto;
         this.nomeAero = modelo.nomeAero;
         this.pais = modelo.pais;
         this.listaVoos = modelo.listaVoos;
