@@ -13,4 +13,4 @@ Linked list implementation to link airports to their respective flights. This pr
 
 Eduardo Migueis, Manuela Benassi and Rodrigo Smith-
 
-Distributed under the MIT License. See ""LICENSE"" for more information.
+Distributed under the MIT License. See `LICENSE` for more information.
